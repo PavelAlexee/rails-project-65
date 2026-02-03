@@ -1,0 +1,2 @@
+/ = button_to 'sign in with Github', 'auth/github', method: :post, data: { turbo: false }
+= button_to 'sign in with Github', auth_request_path('github'), method: :post, data: { turbo: false }
