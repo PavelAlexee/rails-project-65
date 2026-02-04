@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :github_uid, presence: true, uniqueness: true
 
+  has_many :bulletins, dependent: :destroy
 
   before_save :downcase_email
 
