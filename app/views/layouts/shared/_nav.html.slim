@@ -1,2 +1,7 @@
-/ = button_to 'sign in with Github', 'auth/github', method: :post, data: { turbo: false }
-= button_to 'sign in with Github', auth_request_path('github'), method: :post, data: { turbo: false }
+= link_to 'Home', root_path
+
+- if signed_in?
+  p "Привет, #{current_user.email}"
+  = button_to 'Выход', logout_path, method: :delete
+-else
+  = button_to 'sign in with Github', auth_request_path('github'), method: :post, data: { turbo: false }

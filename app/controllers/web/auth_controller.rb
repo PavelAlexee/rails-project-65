@@ -13,10 +13,12 @@ module Web
         redirect_to root_path, notice: "Успешный вход!"
       else
         redirect_to root_path, alert: "Ошибка аутентификации"
-
       end
-      # debugger
-      #
+    end
+
+    def destroy
+      session[:user_id] = nil
+      redirect_to root_path, notice: "Успешный выход!"
     end
   end
 end
