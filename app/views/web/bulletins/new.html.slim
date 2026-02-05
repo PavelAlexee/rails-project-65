@@ -1,0 +1,9 @@
+h1 Создать новое объявление
+
+= simple_form_for @bulletin do |f|
+  = f.input :title, label: 'Название'
+  = f.input :description, label: 'Описание', as: :text
+  = f.file_field :image
+  
+  = f.button :submit, 'Создать', class: 'btn btn-primary'
+  = link_to 'Отмена', bulletins_path, class: 'btn btn-secondary'

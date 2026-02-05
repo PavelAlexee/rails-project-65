@@ -22,12 +22,13 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
-gem 'simple_form'
-gem 'slim-rails'
+gem "simple_form"
+gem "slim-rails"
 
-gem 'omniauth'
-gem 'omniauth-github'
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
+gem "active_storage_validations"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -36,14 +37,14 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "sqlite3", ">= 2.1"
-  gem 'faker'
-  gem 'minitest-power_assert'
-  gem 'rubocop'
-  gem 'rubocop-minitest'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
-  gem 'slim_lint'
-  gem 'dotenv-rails'
+  gem "faker"
+  gem "minitest-power_assert"
+  gem "rubocop"
+  gem "rubocop-minitest"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
+  gem "slim_lint"
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -53,9 +54,9 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
-  gem 'rails-controller-testing'
+  gem "rails-controller-testing"
 end
 
 group :production do
-  gem 'pg'
+  gem "pg"
 end

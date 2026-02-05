@@ -1,0 +1,9 @@
+h1 Все объявления
+
+= link_to 'New bulletin', new_bulletin_path
+
+- @bulletins.each do |bulletin|
+  p = bulletin.title 
+  p = bulletin.description
+  = image_tag bulletin.image.variant(resize_to_limit: [100, 100])
+   
