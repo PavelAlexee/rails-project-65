@@ -1,7 +1,10 @@
-= link_to 'Home', root_path
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4.border-bottom.border-secondary
+  .container-fluid
+    = link_to 'Главная', root_path, class: 'navbar-brand text-light fw-normal'
 
-- if signed_in?
-  p "Привет, #{current_user.email}"
-  = button_to 'Выход', logout_path, method: :delete
--else
-  = button_to 'sign in with Github', auth_request_path('github'), method: :post, data: { turbo: false }
+    - if signed_in?
+      span.navbar-text.me-3.text-white-50
+        small Привет, #{current_user.name}
+      = button_to 'Выход', auth_logout_path, method: :delete, class: 'btn btn-outline-secondary btn-sm'
+    - else
+      = button_to 'sign in with Github', auth_request_path('github'), method: :post, data: { turbo: false }, class: 'btn btn-outline-light btn-sm'

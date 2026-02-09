@@ -1,28 +1,38 @@
 class Web::BulletinsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new show create]
+
   def index
     @bulletins = Bulletin.recent
   end
 
   def new
-    # @bulletin = current_user.bulletins.new
-    @bulletin = Bulletin.new
+    @bulletin = current_user.bulletins.new
+    set_categories
   end
 
   def create
-    # @bulletin = current_user.bulletins.new(bulletin_params)
-    @bulletin = Bulletin.new(bulletin_params)
+    @bulletin = current_user.bulletins.new(bulletin_params)
+    set_categories
 
 
     if @bulletin.save
-      redirect_to @bulletins, notice: "Объявление успешно сохранено!"
+      redirect_to @bulletin, notice: "Объявление успешно сохранено!"
     else
-      render :new, status: :unprocessable_entity
+      render :new, notice: "Объявление не сохранено!" # status: :unprocessable_entity
     end
+  end
+
+  def show
+    @bulletin = Bulletin.find(params[:id])
   end
 
   private
 
   def bulletin_params
-    params.expect(billetin: [ :title, :description, :image ])
+    params.expect(bulletin: [ :title, :description, :image, :category_id ])
+  end
+
+  def set_categories
+    @categories = Category.all
   end
 end
