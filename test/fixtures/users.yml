@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+john:
+  name: John Doe
+  email: john@john.com
+  github_uid: 12345678
 
-one:
-  name: MyString
-  email: MyString
-  github_uid: MyString
-
-two:
-  name: MyString
-  email: MyString
-  github_uid: MyString
+jane:
+  name: Jane Smith
+  email: jane@jane.com
+  github_uid: 1234567890

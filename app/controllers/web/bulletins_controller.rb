@@ -1,5 +1,5 @@
 class Web::BulletinsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new show create]
+  before_action :authenticate_user!, only: %i[new create]
 
   def index
     @bulletins = Bulletin.recent
