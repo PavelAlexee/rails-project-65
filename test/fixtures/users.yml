@@ -2,8 +2,10 @@ john:
   name: John Doe
   email: john@john.com
   github_uid: 12345678
+  admin: true
 
 jane:
   name: Jane Smith
   email: jane@jane.com
   github_uid: 1234567890
+  admin: false

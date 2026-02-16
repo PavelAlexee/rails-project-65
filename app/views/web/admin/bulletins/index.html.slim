@@ -1,0 +1,23 @@
+.container
+  .row
+    = render 'web/admin/shared/menu'
+    .col-md-9
+      .h2.mb-4 Объявления
+      - if @bulletins.empty?
+        .text-center.py-5
+          h3 Пока нет объявлений
+      - else
+        .row.mt-2
+          table.table
+            thead
+              tr
+                th.w-25 Название
+                th.w-25 Дата создания
+                th.w-25 Действия
+                th.w-25
+            tbody
+              - @bulletins.each do |bulletin|
+                tr
+                  td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
+                  td.align-middle = l(bulletin.created_at, format: :short) 
+                  td = render partial: 'web/admin/bulletins/action_buttons', locals: { bulletin: }

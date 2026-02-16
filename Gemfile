@@ -29,7 +29,7 @@ gem "omniauth"
 gem "omniauth-github"
 gem "omniauth-rails_csrf_protection"
 gem "active_storage_validations"
-gem "cocoon"
+gem "pundit"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

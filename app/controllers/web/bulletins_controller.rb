@@ -1,4 +1,6 @@
-class Web::BulletinsController < ApplicationController
+class Web::BulletinsController < Web::ApplicationController
+  include Pundit::Authorization
+
   before_action :authenticate_user!, only: %i[new create]
 
   def index
@@ -7,11 +9,18 @@ class Web::BulletinsController < ApplicationController
 
   def new
     @bulletin = current_user.bulletins.new
+    authorize @bulletin
     set_categories
+  end
+
+  def show
+    @bulletin = Bulletin.find(params[:id])
+    authorize @bulletin
   end
 
   def create
     @bulletin = current_user.bulletins.new(bulletin_params)
+    authorize @bulletin
     set_categories
 
 
@@ -22,9 +31,6 @@ class Web::BulletinsController < ApplicationController
     end
   end
 
-  def show
-    @bulletin = Bulletin.find(params[:id])
-  end
 
   private
 

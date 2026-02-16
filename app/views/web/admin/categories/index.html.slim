@@ -1,0 +1,23 @@
+.container
+  .row
+    = render 'web/admin/shared/menu'
+    .col-md-9
+      .h2.mb-4 Управление категориями
+      = link_to 'Новая категория', new_admin_category_path, class: 'link-primary'
+      - if @categories.empty?
+        .text-center.py-5
+          h3 Пока нет категорий
+      - else
+        .row.mt-2
+          table.table
+            thead
+              tr
+                th.w-25 ID
+                th.w-25 Название
+                th.w-25 Действия
+            tbody
+              - @categories.each do |category|  
+                tr
+                  td.align-middle = category.id
+                  td.align-middle = category.name
+                  td = render partial: 'web/admin/categories/action_buttons', locals: { category: }
