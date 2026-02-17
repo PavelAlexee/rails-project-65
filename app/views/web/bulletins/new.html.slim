@@ -1,0 +1,42 @@
+.container.text-center
+  h1.display-6 Создать новое объявление
+
+.container
+  .row.justify-contenr
+    .col-md-8.col-lg-6
+        = simple_form_for @bulletin do |f|
+          = f.input :title,
+            label: 'Название объявления',
+            placeholder: 'Введите краткое название',
+            required: true,
+            wrapper_html: { class: 'mb-4' },
+            input_html: { rows: 5, class: 'form-control' }
+          
+          = f.input :description,
+            label: 'Подробное описание',
+            as: :text,
+            placeholder: 'Опишите подробно, что вы предлагаете...',
+            required: true,
+            wrapper_html: { class: 'mb-4' },
+            input_html: { rows: 5, class: 'form-control' }
+          
+          = f.association :category,
+            label: 'Категория',
+            collection: @categories,
+            prompt: '-- Выберите категорию --',
+            required: true,
+            wrapper_html: { class: 'mb-4' },
+            input_html: { class: 'form-select' }
+          
+          = f.input :image,
+            as: :file,
+            label: 'Изображение',
+            hint: 'Максимальный размер 5MB. Разрешены форматы: JPG, PNG.',
+            required: true,
+            wrapper_html: { class: 'mb-4' },
+            input_html: { class: 'form-control', direct_upload: true }
+          
+          .d-grid.gap-2.d-md-flex.justify-content-md-start.mt-4.pt-3.border-top
+            = f.button :submit, 'Создать объявление', 
+              class: 'btn btn-primary px-4'
+            = link_to 'Отмена', bulletins_path, class: 'btn btn-outline-secondary me-2'

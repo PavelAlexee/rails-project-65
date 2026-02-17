@@ -1,0 +1,14 @@
+electronics:
+  name: Электроника
+
+books:
+  name: Книги
+
+furniture:
+  name: Мебель
+
+clothing:
+  name: Одежда
+
+automotive:
+  name: Автомобили
