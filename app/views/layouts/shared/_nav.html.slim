@@ -1,8 +1,14 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4.border-bottom.border-secondary
   .container-fluid
-    = link_to 'Главная', root_path, class: 'navbar-brand text-light fw-normal'
+    ul.nav.nav-pills
+      li.nav-item.me-2
+        = link_to 'Главная', root_path, class: 'navbar-brand text-light fw-normal'
+      - if signed_in?
+        li.nav-item.me-2
+          = link_to 'Мои объявления', web_users_profile_path, class: 'navbar-brand text-light'
 
     - if signed_in?
+
       span.navbar-text.me-3.text-white-50
         small Привет, #{current_user.name}
       ul.nav.nav-pills

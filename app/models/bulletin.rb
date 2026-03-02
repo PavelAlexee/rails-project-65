@@ -1,4 +1,6 @@
 class Bulletin < ApplicationRecord
+  include AASM
+
   has_one_attached :image
 
   validates :image, attached: true,
@@ -11,5 +13,38 @@ class Bulletin < ApplicationRecord
   belongs_to :category
   belongs_to :user
 
-  scope :recent, -> { order(created_at: :desc) }
+  scope :recent, -> { where(state: "published").order(created_at: :desc) }
+
+  aasm column: :state do
+    state :draft, initial: true
+    state :under_moderation
+    state :published
+    state :rejected
+    state :archived
+
+    event :to_moderate do
+      transitions from: :draft, to: :under_moderation
+    end
+    event :archive do
+      transitions from: [ :draft, :under_moderation, :published, :rejected ], to: :archived
+    end
+    event :reject do
+      transitions from: :under_moderation, to: :rejected
+    end
+    event :publish do
+      transitions from: :under_moderation, to: :published
+    end
+  end
+
+  def can_to_moderation?
+    draft? || rejected?
+  end
+
+  def can_archive?
+    !archived?
+  end
+
+  def can_restore?
+    archived?
+  end
 end
