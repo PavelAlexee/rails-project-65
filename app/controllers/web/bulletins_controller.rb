@@ -15,7 +15,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def show
     @bulletin = Bulletin.find(params[:id])
-    authorize @bulletin
+    authorize(@bulletin)
   end
 
   def create
@@ -31,6 +31,57 @@ class Web::BulletinsController < Web::ApplicationController
     end
   end
 
+  def edit
+    @bulletin = Bulletin.find(params[:id])
+
+    authorize(@bulletin)
+    set_categories
+  end
+
+  def update
+    @bulletin = Bulletin.find(params[:id])
+    authorize(@bulletin)
+
+    if @bulletin.update(bulletin_params)
+      redirect_to profile_path, notice: "Объявление успешно обновлено!"
+    else
+      render :edit, notice: "Объявление не сохранено!" # status: :unprocessable_entity
+    end
+  end
+
+  def to_moderate
+    bulletin = Bulletin.find(params[:id])
+    authorize(bulletin)
+
+    if bulletin.to_moderate!
+      redirect_to profile_path, notice: "Объявление отправлено на модерацию"
+    else
+      redirect_to profile_path, alert: "Не удалось отправить на модерацию"
+    end
+  end
+
+  def reject
+    bulletin = Bulletin.find(params[:id])
+    authorize(bulletin)
+
+    if bulletin.reject!
+      redirect_to profile_path, notice: "Объявление отклонено"
+    else
+      redirect_to profile_path, alert: "Не удалось отклонить"
+    end
+  end
+
+
+  def archive
+    bulletin = Bulletin.find(params[:id])
+    authorize(bulletin)
+
+    if bulletin.archive!
+      redirect_to profile_path, notice: "Объявление перемещено в архив"
+    else
+      redirect_to profile_path, alert: "Не удалось переместить в архив"
+    end
+  end
 
   private
 

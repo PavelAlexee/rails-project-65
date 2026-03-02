@@ -1,0 +1,52 @@
+= simple_form_for @bulletin do |f|  
+  = f.input :title,
+    label: 'Название объявления',
+    placeholder: 'Введите краткое название',
+    required: true,
+    wrapper_html: { class: 'mb-4' },
+    input_html: { class: 'form-control' }
+  
+  = f.input :description,
+    label: 'Подробное описание',
+    as: :text,
+    placeholder: 'Опишите подробно, что вы предлагаете...',
+    required: true,
+    wrapper_html: { class: 'mb-4' },
+    input_html: { rows: 5, class: 'form-control' }
+  
+  = f.association :category,
+    label: 'Категория',
+    collection: @categories,
+    prompt: '-- Выберите категорию --',
+    required: true,
+    wrapper_html: { class: 'mb-4' },
+    input_html: { class: 'form-select' }
+  
+  .mb-4
+    = f.label :image, 'Изображение', class: 'form-label'
+    
+    - if @bulletin.image.attached? && @bulletin.persisted?
+      .current-image.mb-3
+        .d-flex.align-items-center.gap-3
+          = image_tag @bulletin.image.variant(resize_to_limit: [100, 100]), 
+            class: 'img-thumbnail'
+          .form-text.text-muted
+            | Текущее изображение
+            br
+            small Оставьте пустым, если не хотите менять
+    
+    = f.file_field :image, 
+      class: 'form-control',
+      direct_upload: true,
+      accept: 'image/jpeg,image/png'
+    .form-text.text-muted.mt-1
+      | Максимальный размер 5MB. Разрешены форматы: JPG, PNG.
+  
+  .d-grid.gap-2.d-md-flex.justify-content-md-start.mt-4.pt-3.border-top
+    = f.button :submit, 
+      (@bulletin.new_record? ? 'Создать объявление' : 'Обновить объявление'), 
+      class: 'btn btn-primary px-4'
+    
+    = link_to 'Отмена', 
+      (@bulletin.new_record? ? bulletins_path : profile_path), 
+      class: 'btn btn-outline-secondary me-2'
