@@ -4,6 +4,8 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
 
   def index
     @categories = Category.all
+                          .page(params[:page])
+                          .per(20)
   end
 
   def new

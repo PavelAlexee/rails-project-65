@@ -16,3 +16,5 @@
                 td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
                 td.align-middle = l(bulletin.created_at, format: :short) 
                 td = render partial: 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: }
+            
+      = render 'layouts/shared/paginator', object: @bulletins 

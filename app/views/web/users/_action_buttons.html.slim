@@ -3,4 +3,5 @@
   = link_to 'Редактировать', edit_bulletin_path(bulletin), class: 'btn btn-sm btn-outline-success me-1'
 - if bulletin.can_to_moderation?
   = button_to 'На модерацию', to_moderate_bulletin_path(bulletin), method: :patch, class: 'btn btn-sm btn-outline-danger me-1',form_class: 'd-inline'
-= button_to 'В архив', archive_bulletin_path(bulletin), method: :patch, class: 'btn btn-sm btn-outline-danger me-1', form_class: 'd-inline'
+- unless bulletin.archived?
+  = button_to 'В архив', archive_bulletin_path(bulletin), method: :patch, class: 'btn btn-sm btn-outline-danger me-1', form_class: 'd-inline'

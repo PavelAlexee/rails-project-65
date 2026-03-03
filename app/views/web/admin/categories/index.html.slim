@@ -21,3 +21,5 @@
                   td.align-middle = category.id
                   td.align-middle = category.name
                   td = render partial: 'web/admin/categories/action_buttons', locals: { category: }
+
+        = render 'layouts/shared/paginator', object: @categories 
