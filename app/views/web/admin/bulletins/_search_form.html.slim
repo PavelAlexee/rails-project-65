@@ -1,0 +1,23 @@
+.p-4.bg-light
+  = search_form_for q, url: admin_bulletins_path,
+                      method: :get,
+                      html: { class: "row g-3" } do |f|
+    .col-md-6
+      = f.search_field :title_or_description_cont,
+                        class: "form-control",
+                        placeholder: "Введите ключевые слова..."
+      small.form-text.text-muted Искать по названию объявления
+
+    .col-md-3
+      = f.select :state_eq,
+                  options_for_select(@aasm, params.dig(:q, :state_eq)),
+                  { include_blank: "Любое состояние" },
+                  class: "form-select"
+      small.form-text.text-muted По состоянию
+
+    .col-md-2
+      .d-flex.gap-2
+        = f.submit "Найти", class: "btn btn-primary"
+        = link_to "Сбросить", admin_bulletins_path,
+                              class: "btn btn-outline-secondary"
+    hr

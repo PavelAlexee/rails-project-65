@@ -4,7 +4,8 @@ mt-4.mb-5.pb-5
       .row
         .p-3.p-lg-5.pt-lg-0
           .h2.mb-4 Мои объявления
-          = link_to 'Создать новое объявление', new_bulletin_path
+          = link_to "Создать новое объявление", new_bulletin_path
+          = render "web/users/search_form", q: @q
 
           .row.mt-5
             table.table-borderless
@@ -15,9 +16,11 @@ mt-4.mb-5.pb-5
                   th Дата создания
                   th Действия
               tbody
-                - @bulletins.each do |bulletin|  
+                - @bulletins.each do |bulletin|
                   tr
                     td.align-middle = bulletin.title
                     td.align-middle = bulletin.state
-                    td.align-middle = l(bulletin.created_at, format: :short) 
-                    td = render partial: 'web/users/action_buttons', locals: { bulletin: }
+                    td.align-middle = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                    td = render partial: "web/users/action_buttons", locals: { bulletin: }
+
+          = render "layouts/shared/paginator", object: @bulletins

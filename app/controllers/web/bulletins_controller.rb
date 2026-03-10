@@ -4,7 +4,13 @@ class Web::BulletinsController < Web::ApplicationController
   before_action :authenticate_user!, only: %i[new create]
 
   def index
-    @bulletins = Bulletin.recent
+    @q = Bulletin.ransack(params[:q])
+    @bulletins = @q.result(distinct: true)
+                   .where(state: :published)
+                   .order(created_at: :desc)
+                   .page(params[:page])
+                   .per(20)
+    set_categories
   end
 
   def new

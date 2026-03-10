@@ -2,12 +2,20 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   include Pundit::Authorization
 
   def index
-    @bulletins = Bulletin.all
+    @q = Bulletin.ransack(params[:q])
+    @bulletins = @q.result(distinct: true)
+                   .order(created_at: :desc)
+                   .page(params[:page])
+                   .per(20)
+    @aasm = Bulletin.aasm.states_for_select
     authorize @bulletins
   end
 
   def on_moderate
-    @bulletins = Bulletin.where(state: :under_moderation).order(created_at: :desc)
+    @bulletins = Bulletin.where(state: :under_moderation)
+                          .order(created_at: :desc)
+                          .page(params[:page])
+                          .per(20)
     authorize(@bulletins)
   end
 

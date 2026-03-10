@@ -1,6 +1,17 @@
-= link_to 'Просмотр', bulletin_path(bulletin), class: 'btn btn-sm btn-outline-primary me-1'
+= link_to "Просмотр", bulletin_path(bulletin),
+                    class: "btn btn-sm btn-outline-primary me-1"
 - if bulletin.under_moderation?
-  = button_to 'Опубликовать', publish_admin_bulletin_path(bulletin), method: :patch, class: 'btn btn-sm btn-outline-primary me-1', form_class: 'd-inline' 
-  = button_to 'Отклонить', reject_admin_bulletin_path(bulletin), method: :patch, class: 'btn btn-sm btn-outline-primary me-1', form_class: 'd-inline'
+  = button_to "Опубликовать", publish_admin_bulletin_path(bulletin),
+                            method: :patch,
+                            class: "btn btn-sm btn-outline-primary me-1",
+                            form_class: "d-inline"
+  = button_to "Отклонить", reject_admin_bulletin_path(bulletin),
+                          method: :patch,
+                          class: "btn btn-sm btn-outline-primary me-1",
+                          form_class: "d-inline"
 - unless bulletin.archived?
-  = button_to 'В архив', archive_admin_bulletin_path(bulletin, return_to: on_moderate_admin_bulletins_path), method: :patch, class: 'btn btn-sm btn-outline-danger me-1', form_class: 'd-inline'
+  = button_to "В архив", archive_admin_bulletin_path(bulletin,
+                        return_to: on_moderate_admin_bulletins_path),
+                        method: :patch,
+                        class: "btn btn-sm btn-outline-danger me-1",
+                        form_class: "d-inline"

@@ -1,6 +1,6 @@
 .container
   .row
-    = render 'web/admin/shared/menu'
+    = render "web/admin/shared/menu"
     .col-md-9
       .h2.mb-4 На модерации
       .row.mt-2
@@ -13,6 +13,9 @@
           tbody
             - @bulletins.each do |bulletin|
               tr
-                td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
-                td.align-middle = l(bulletin.created_at, format: :short) 
-                td = render partial: 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: }
+                td.align-middle = link_to bulletin.title,
+                                        bulletin_path(bulletin)
+                td.align-middle = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                td = render partial: "web/admin/bulletins/action_buttons_moderate", locals: { bulletin: }
+
+      = render "layouts/shared/paginator", object: @bulletins

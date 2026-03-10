@@ -1,0 +1,19 @@
+.container
+  .p-3.bg-light
+    = search_form_for q, url: bulletins_path, method: :get, html: { class: "row g-3" } do |f|
+      .col-md-6
+        = f.search_field :title_or_description_cont, class: "form-control", placeholder: "Введите ключевые слова..."
+        small.form-text.text-muted Искать по названию объявления
+
+      .col-md-4
+        = f.select :category_id_eq,
+                   options_from_collection_for_select(@categories, :id, :name, params.dig(:q, :category_id_eq)),
+                   { include_blank: "Все категории" },
+                   class: "form-select"
+        small.form-text.text-muted Выбрать категорию
+
+      .col-md-2
+        .d-flex.gap-2
+          = f.submit "Найти", class: "btn btn-primary"
+          = link_to "Сбросить", bulletins_path, class: "btn btn-outline-secondary"
+      hr

@@ -31,6 +31,8 @@ gem "omniauth-rails_csrf_protection"
 gem "active_storage_validations"
 gem "pundit"
 gem "aasm"
+gem "ransack"
+gem "kaminari"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
