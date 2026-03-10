@@ -6,6 +6,7 @@ class Web::BulletinsController < Web::ApplicationController
   def index
     @q = Bulletin.ransack(params[:q])
     @bulletins = @q.result(distinct: true)
+                   .where(state: :published)
                    .order(created_at: :desc)
                    .page(params[:page])
                    .per(20)

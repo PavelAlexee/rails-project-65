@@ -1,12 +1,12 @@
 .container
   .row
-    = render 'web/admin/shared/menu'
+    = render "web/admin/shared/menu"
     .col-md-9
       .h2.mb-4 Объявления
-      
+
       .card.mb-4.shadow-sm
         .card-body
-          = render 'web/admin/bulletins/search_form', q: @q 
+          = render "web/admin/bulletins/search_form", q: @q
           table.table.table-hover.mb-0
             thead
               tr
@@ -17,10 +17,12 @@
             tbody
               - @bulletins.each do |bulletin|
                 tr
-                  td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
+                  td.align-middle = link_to bulletin.title,
+                                              bulletin_path(bulletin)
                   td.align-middle = bulletin.state
-                  td.align-middle = l(bulletin.created_at, format: :short) 
-                  td = render partial: 'web/admin/bulletins/action_buttons', locals: { bulletin: }
+                  td.align-middle = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                  td = render partial: "web/admin/bulletins/action_buttons",
+                                      locals: { bulletin: }
             .d-flex.justify-content-center.mt-4
 
-        = render 'layouts/shared/paginator', object: @bulletins 
+        = render "layouts/shared/paginator", object: @bulletins
