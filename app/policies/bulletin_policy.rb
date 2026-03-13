@@ -1,3 +1,4 @@
+# app/policies/bulletin_policy.rb
 class BulletinPolicy < ApplicationPolicy
   def index?
     true
@@ -8,7 +9,7 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def create?
-    user_is_owner?
+    user.present? && user_is_owner?
   end
 
   def new?
@@ -16,35 +17,35 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def edit?
-    user_is_owner? || user.admin?
+    user.present? && (user_is_owner? || user.admin?)
   end
 
   def update?
-    user_is_owner? || user.admin?
+    user.present? && (user_is_owner? || user.admin?)
   end
 
   def destroy?
-    user_is_owner? || user.admin?
+    user.present? && (user_is_owner? || user.admin?)
   end
 
   def to_moderate?
-    update?
+    user.present? && (user_is_owner? || user.admin?)
   end
 
   def on_moderate?
-    user.admin?
+    user.present? && user.admin?
   end
 
   def reject?
-    user.admin?
+    user.present? && user.admin?
   end
 
   def publish?
-    user.admin?
+    user.present? && user.admin?
   end
 
   def archive?
-    update?
+    user.present? && (user_is_owner? || user.admin?)
   end
 
   private
