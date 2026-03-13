@@ -34,7 +34,7 @@ make start
 
 Приложение развернуто и доступно онлайн:
 
-**Демо-версия:** ([https://the-blog-hub-bcp7.onrender.com](https://the-blog-hub-bcp7.onrender.com/))
+**Демо-версия:** (https://the-bulletin-boards.onrender.com/)
 
 > Приложение размещено на бесплатном тарифе Render.
 
