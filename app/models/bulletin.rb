@@ -1,8 +1,6 @@
 class Bulletin < ApplicationRecord
   include AASM
 
-  has_one_attached :image
-
   validates :image, attached: true,
                     content_type: %i[png jpg jpeg],
                     size: { less_than: 5.megabytes }
@@ -12,6 +10,7 @@ class Bulletin < ApplicationRecord
 
   belongs_to :category
   belongs_to :user
+  has_one_attached :image
 
   scope :recent, -> { where(state: "published").order(created_at: :desc) }
 
