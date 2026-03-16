@@ -17,7 +17,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    true
   end
 
   def new?
@@ -43,7 +43,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NoMethodError, "You must define #resolve in #{self.class}"
+      raise NotImplementedError, "You must define #resolve in #{self.class}"
     end
 
     private
