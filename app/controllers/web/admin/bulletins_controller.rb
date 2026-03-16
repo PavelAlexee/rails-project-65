@@ -8,7 +8,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
                    .page(params[:page])
                    .per(20)
     @aasm = Bulletin.aasm.states_for_select
-    authorize @bulletins
+    # authorize @bulletins
   end
 
   def on_moderate
@@ -16,12 +16,12 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
                           .order(created_at: :desc)
                           .page(params[:page])
                           .per(20)
-    authorize(@bulletins)
+    # authorize(@bulletins)
   end
 
   def publish
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     if bulletin.publish!
       redirect_to on_moderate_admin_bulletins_path, notice: "Объявление опубликовано"
@@ -32,7 +32,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def reject
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     if bulletin.reject!
       redirect_to on_moderate_admin_bulletins_path, notice: "Объявление возвращено на доработку"
@@ -44,7 +44,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def archive
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     return_path = params[:return_to].presence || root_path
 
