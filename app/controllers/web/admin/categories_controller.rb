@@ -1,7 +1,4 @@
 class Web::Admin::CategoriesController < Web::Admin::ApplicationController
-  before_action :requeres_authentication
-  before_action :authenticate_user!
-
   def index
     @categories = Category.all
                           .page(params[:page])
@@ -15,9 +12,9 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to admin_categories_path, notice: "Категория успешно создана!"
+      redirect_to admin_categories_path, notice: t("flash.admin.categories.create.success")
     else
-      render :new, notice: "Категория не сохранена!" # status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: t("flash.admin.categories.create.failure")
     end
   end
 
@@ -28,16 +25,22 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def update
     set_category
     if @category.update(category_params)
-      redirect_to admin_categories_path, notice: "Категория успешно обновлена!"
+      redirect_to admin_categories_path, notice: t("flash.admin.categories.update.success")
     else
-      render :edit, notice: "Категория не сохранена!" # status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity, alert: t("flash.admin.categories.update.failure")
     end
   end
 
   def destroy
     set_category
-    @category.destroy
-    redirect_to admin_categories_path, notice: "Категория успешно удалена!"
+
+    if @category.bulletins.exists?
+      redirect_to admin_categories_path, alert: t("flash.admin.categories.destroy.has_bulletins")
+    elsif @category.destroy
+      redirect_to admin_categories_path, notice: t("flash.admin.categories.destroy.success")
+    else
+      redirect_to admin_categories_path, alert: t("flash.admin.categories.destroy.failure")
+    end
   end
 
   private

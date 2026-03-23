@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :web do
-    get "users/profile"
-  end
   scope module: :web do
     root "bulletins#index"
 
@@ -9,7 +6,12 @@ Rails.application.routes.draw do
     get "auth/:provider/callback", to: "auth#callback", as: :callback_auth
     delete "auth/logout", to: "auth#destroy"
 
-    get "profile", to: "users#profile", as: :profile
+    resource :profile, controller: "profiles", only: [ :show ] do
+      member do
+        patch :make_admin
+        patch :remove_admin
+      end
+    end
 
     resources :bulletins, only: %i[index new create edit update show] do
       member do

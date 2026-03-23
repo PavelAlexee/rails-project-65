@@ -1,0 +1,84 @@
+# config/locales/ru.yml
+ru:
+  aasm:
+    state:
+      bulletin:
+        draft: "Черновик"
+        under_moderation: "На модерации"
+        published: "Опубликовано"
+        rejected: "Отклонено"
+        archived: "В архиве"
+  
+  activerecord:
+    attributes:
+      bulletin:
+        title: "Название"
+        description: "Описание"
+        image: "Изображение"
+        category: "Категория"
+      category:    
+        name: "Название категории"
+    errors:
+      messages:
+        blank: "не может быть пустым"
+        taken: "уже существует"
+        attached: "должно быть прикреплено изображение"
+      models:
+        bulletin:
+          attributes:
+            title:
+              blank: "не может быть пустым"
+            description:
+              blank: "не может быть пустым"
+            image:
+              blank: "обязательно"
+            category:
+              blank: "обязательна"
+              required: "обязательна"
+  
+  # Flash сообщения
+  flash:
+    auth:
+      success: "Успешный вход!"
+      failure: "Ошибка аутентификации"
+      logout: "Успешный выход!"
+    
+    bulletins:
+      create:
+        success: "Объявление успешно сохранено!"
+        failure: "Не удалось сохранить объявление"
+      update:
+        success: "Объявление успешно обновлено!"
+        failure: "Не удалось обновить объявление"
+      to_moderate:
+        success: "Объявление отправлено на модерацию"
+        failure: "Не удалось отправить на модерацию"
+      archive:
+        success: "Объявление перемещено в архив"
+        failure: "Не удалось переместить в архив"
+      reject:
+        success: "Объявление отклонено"
+        failure: "Не удалось отклонить объявление"
+    
+    admin:
+      categories:
+        create:
+          success: "Категория успешно создана!"
+          failure: "Категория не сохранена!"
+        update:
+          success: "Категория успешно обновлена!"
+          failure: "Категория не сохранена!"
+        destroy:
+          success: "Категория успешно удалена!"
+          failure: "Не удалось удалить категорию"
+          has_bulletins: "Нельзя удалить категорию, в которой есть объявления"
+    
+    profiles:
+      make_admin:
+        success: "Пользователь теперь администратор"
+      remove_admin:
+        success: "Права администратора удалены"
+    
+    # Общие сообщения
+    auth_required: "Для выполнения этого действия необходимо войти в систему"
+    access_denied: "У вас нет доступа к этой странице"

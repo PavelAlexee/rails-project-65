@@ -2,11 +2,11 @@
 
 class BulletinPolicy < ApplicationPolicy
   def show?
-    record.published? || user_is_owner? || show_all?
+    record.published? || user_is_owner?
   end
 
   def update?
-    user_is_owner? || user.admin?
+    user_is_owner?
   end
 
   def to_moderate?
@@ -15,10 +15,6 @@ class BulletinPolicy < ApplicationPolicy
 
   def archive?
     update?
-  end
-
-  def show_all?
-    user&.admin?
   end
 
   private

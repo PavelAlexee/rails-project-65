@@ -7,10 +7,6 @@ class Web::ApplicationController < ApplicationController
 
   private
 
-  def requeres_authentication
-    redirect_to root_path, alert: "Только для зарегистрированных пользователей" unless signed_in?
-  end
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id].present?
   end
@@ -22,6 +18,6 @@ class Web::ApplicationController < ApplicationController
   def authenticate_user!
     return if signed_in?
 
-    redirect_to root_path, alert: "Для выполнения этого действия необходимо войти в систему"
+    redirect_to root_path, alert: t("flash.auth_required")
   end
 end

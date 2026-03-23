@@ -35,18 +35,6 @@ class Bulletin < ApplicationRecord
     end
   end
 
-  def can_to_moderation?
-    draft? || rejected?
-  end
-
-  def can_archive?
-    !archived?
-  end
-
-  def can_restore?
-    archived?
-  end
-
   private
 
   def self.ransackable_attributes(auth_object = nil)
