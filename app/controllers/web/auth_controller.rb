@@ -10,15 +10,15 @@ module Web
 
       if user.save
         session[:user_id] = user.id
-        redirect_to root_path, notice: "Успешный вход!"
+        redirect_to root_path, notice: t("flash.auth.success")
       else
-        redirect_to root_path, alert: "Ошибка аутентификации"
+        redirect_to root_path, alert: t("flash.auth.failure")
       end
     end
 
     def destroy
       session[:user_id] = nil
-      redirect_to root_path, notice: "Успешный выход!"
+      redirect_to root_path, notice: t("flash.auth.logout")
     end
   end
 end

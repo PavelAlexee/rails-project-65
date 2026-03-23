@@ -1,7 +1,7 @@
 class Web::BulletinsController < Web::ApplicationController
   include Pundit::Authorization
 
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create edit update]
 
   def index
     @q = Bulletin.ransack(params[:q])
@@ -29,17 +29,15 @@ class Web::BulletinsController < Web::ApplicationController
     authorize @bulletin
     set_categories
 
-
     if @bulletin.save
-      redirect_to @bulletin, notice: "Объявление успешно сохранено!"
+      redirect_to @bulletin, notice: t("flash.bulletins.create.success")
     else
-      render :new, notice: "Объявление не сохранено!" # status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
   def edit
     @bulletin = Bulletin.find(params[:id])
-
     authorize(@bulletin)
     set_categories
   end
@@ -49,9 +47,9 @@ class Web::BulletinsController < Web::ApplicationController
     authorize(@bulletin)
 
     if @bulletin.update(bulletin_params)
-      redirect_to profile_path, notice: "Объявление успешно обновлено!"
+      redirect_to profile_path, notice: t("flash.bulletins.update.success")
     else
-      render :edit, notice: "Объявление не сохранено!" # status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -59,10 +57,11 @@ class Web::BulletinsController < Web::ApplicationController
     bulletin = Bulletin.find(params[:id])
     authorize(bulletin)
 
-    if bulletin.to_moderate!
-      redirect_to profile_path, notice: "Объявление отправлено на модерацию"
+    if bulletin.may_to_moderate?
+      bulletin.to_moderate!
+      redirect_to profile_path, notice: t("flash.bulletins.to_moderate.success")
     else
-      redirect_to profile_path, alert: "Не удалось отправить на модерацию"
+      redirect_to profile_path, alert: t("flash.bulletins.to_moderate.failure")
     end
   end
 
@@ -70,29 +69,30 @@ class Web::BulletinsController < Web::ApplicationController
     bulletin = Bulletin.find(params[:id])
     authorize(bulletin)
 
-    if bulletin.reject!
-      redirect_to profile_path, notice: "Объявление отклонено"
+    if bulletin.may_reject?
+      bulletin.reject!
+      redirect_to profile_path, notice: t("flash.bulletins.reject.success")
     else
-      redirect_to profile_path, alert: "Не удалось отклонить"
+      redirect_to profile_path, alert: t("flash.bulletins.reject.failure")
     end
   end
-
 
   def archive
     bulletin = Bulletin.find(params[:id])
     authorize(bulletin)
 
-    if bulletin.archive!
-      redirect_to profile_path, notice: "Объявление перемещено в архив"
+    if bulletin.may_archive?
+      bulletin.archive!
+      redirect_to profile_path, notice: t("flash.bulletins.archive.success")
     else
-      redirect_to profile_path, alert: "Не удалось переместить в архив"
+      redirect_to profile_path, alert: t("flash.bulletins.archive.failure")
     end
   end
 
   private
 
   def bulletin_params
-    params.expect(bulletin: [ :title, :description, :image, :category_id ])
+    params.require(:bulletin).permit(:title, :description, :image, :category_id)
   end
 
   def set_categories

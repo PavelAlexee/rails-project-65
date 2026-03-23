@@ -19,7 +19,7 @@
                 tr
                   td.align-middle = link_to bulletin.title,
                                               bulletin_path(bulletin)
-                  td.align-middle = bulletin.state
+                  td.align-middle = human_state(bulletin.state)
                   td.align-middle = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
                   td = render partial: "web/admin/bulletins/action_buttons",
                                       locals: { bulletin: }

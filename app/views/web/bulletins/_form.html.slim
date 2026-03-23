@@ -1,10 +1,18 @@
 = simple_form_for @bulletin do |f|
+  - if @bulletin.errors.any?
+    .alert.alert-danger.mb-4
+      h5 = "#{pluralize(@bulletin.errors.count, "ошибка")} при сохранении:"
+      ul
+        - @bulletin.errors.full_messages.each do |msg|
+          li = msg
+
   = f.input :title,
     label: "Название объявления",
     placeholder: "Введите краткое название",
     required: true,
     wrapper_html: { class: "mb-4" },
-    input_html: { class: "form-control" }
+    input_html: { class: "form-control" },
+    error: false
 
   = f.input :description,
     label: "Подробное описание",
@@ -12,7 +20,8 @@
     placeholder: "Опишите подробно, что вы предлагаете...",
     required: true,
     wrapper_html: { class: "mb-4" },
-    input_html: { rows: 5, class: "form-control" }
+    input_html: { rows: 5, class: "form-control" },
+    error: false
 
   = f.association :category,
     label: "Категория",
@@ -20,7 +29,8 @@
     prompt: "-- Выберите категорию --",
     required: true,
     wrapper_html: { class: "mb-4" },
-    input_html: { class: "form-select" }
+    input_html: { class: "form-select" },
+    error: false
 
   .mb-4
     = f.label :image, "Изображение", class: "form-label"
