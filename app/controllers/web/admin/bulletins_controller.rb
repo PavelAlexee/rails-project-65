@@ -24,7 +24,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_reject?
       bulletin.reject!
-      redirect_to admin_home_indexs_path, notice: t("flash.bulletins.reject.success")
+      redirect_to admin_home_index_path, notice: t("flash.bulletins.reject.success")
     else
       redirect_to admin_home_index_path, alert: t("flash.bulletins.reject.failure")
     end

@@ -10,7 +10,7 @@
 
     .col-md-3
       = f.select :state_eq,
-                  options_for_select(@aasm_options, params.dig(:q, :state_eq)),
+                  options_for_select(@aasm, params.dig(:q, :state_eq)),
                   { include_blank: t("admin.bulletins.search.any_state") },
                   class: "form-select"
       small.form-text.text-muted = t("admin.bulletins.search.by_state")
