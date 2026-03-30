@@ -13,7 +13,7 @@
 1. **Клонирование репозитория**
 ```bash
 git clone https://github.com/PavelAlexee/rails-project-65.git
-cd rails-project-64
+cd rails-project-65
 ```
 
 2. **Отредактируй файл под свои нужды для БД**
