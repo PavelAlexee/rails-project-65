@@ -5,14 +5,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
                    .order(created_at: :desc)
                    .page(params[:page])
                    .per(20)
-    @aasm = Bulletin.aasm.states_for_select
-  end
-
-  def on_moderate
-    @bulletins = Bulletin.where(state: :under_moderation)
-                          .order(created_at: :desc)
-                          .page(params[:page])
-                          .per(20)
+    @aasm = aasm_options
   end
 
   def publish
@@ -20,9 +13,9 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_publish?
       bulletin.publish!
-      redirect_to on_moderate_admin_bulletins_path, notice: t("flash.bulletins.to_moderate.success")
+      redirect_to admin_home_index_path, notice: t("flash.bulletins.to_moderate.success")
     else
-      redirect_to on_moderate_admin_bulletins_path, alert: t("flash.bulletins.to_moderate.failure")
+      redirect_to admin_home_index_path, alert: t("flash.bulletins.to_moderate.failure")
     end
   end
 
@@ -31,9 +24,9 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_reject?
       bulletin.reject!
-      redirect_to on_moderate_admin_bulletins_path, notice: t("flash.bulletins.reject.success")
+      redirect_to admin_home_indexs_path, notice: t("flash.bulletins.reject.success")
     else
-      redirect_to on_moderate_admin_bulletins_path, alert: t("flash.bulletins.reject.failure")
+      redirect_to admin_home_index_path, alert: t("flash.bulletins.reject.failure")
     end
   end
 
@@ -47,6 +40,14 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
       redirect_to return_path, notice: t("flash.bulletins.archive.success")
     else
       redirect_to return_path, alert: t("flash.bulletins.archive.failure")
+    end
+  end
+
+  private
+
+  def aasm_options
+    Bulletin.aasm.states.map do |state|
+      [ I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s ]
     end
   end
 end

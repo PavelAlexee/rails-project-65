@@ -1,16 +1,16 @@
 .container
   .p-4.align-items-center.border.shadow.bg-white.rounded-3
     .container.text-center
-      h1.display-5 Все объявления
+      h1.display-5 = t("bulletins.index.title")
       - if signed_in?
-        = link_to "Создать новое объявление", new_bulletin_path, class: "btn btn-light btn-lg shadow"
+        = link_to t("profiles.show.create_new"), new_bulletin_path, class: "btn btn-light btn-lg shadow"
 
     = render "web/bulletins/search_form", q: @q
 
     .container
       - if @bulletins.empty?
         .text-center.py-5
-          h3 Пока нет объявлений
+          h3 = t("bulletins.index.empty")
       - else
         .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4.mt-2
           - @bulletins.each do |bulletin|
@@ -21,12 +21,12 @@
                     = image_tag bulletin.image, class: "w-100 h-100 object-fit-cover"
                 - else
                   .card-img-top.bg-light.d-flex.align-items-center.justify-content-center(style="height: 200px;")
-                    span.text-muted Нет фото
+                    span.text-muted = t("bulletins.index.no_photo")
 
                 .card-body.d-flex.flex-column
                   .mb-2
                     span.badge.bg-primary
-                      = bulletin.category&.name || "Без категории"
+                      = bulletin.category&.name || t("bulletins.index.no_category")
 
                   h5.card-title
                     = link_to bulletin.title, bulletin_path(bulletin), class: "text-decoration-none text-dark"
@@ -35,8 +35,8 @@
                     = truncate(bulletin.description, length: 100)
 
                   .d-flex.justify-content-between.align-items-center.mt-3
-                    = link_to "Просмотр", bulletin_path(bulletin), class: "btn btn-outline-secondary btn-sm"
+                    = link_to t("bulletins.index.view"), bulletin_path(bulletin), class: "btn btn-outline-secondary btn-sm"
                     small.text-muted
-                      = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                      = format_datetime(bulletin.created_at)
 
         = render "layouts/shared/paginator", object: @bulletins

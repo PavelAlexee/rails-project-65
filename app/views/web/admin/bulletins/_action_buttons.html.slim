@@ -1,7 +1,7 @@
-= link_to "Просмотр", bulletin_path(bulletin),
+= link_to t("admin.bulletins.action_buttons.view"), bulletin_path(bulletin),
                     class: "btn btn-sm btn-outline-primary me-1"
 - unless bulletin.archived?
-  = button_to "В архив", archive_admin_bulletin_path(bulletin,
+  = button_to t("admin.bulletins.action_buttons.archive"), archive_admin_bulletin_path(bulletin,
                         return_to: admin_bulletins_path),
                         method: :patch,
                         class: "btn btn-sm btn-outline-danger me-1",

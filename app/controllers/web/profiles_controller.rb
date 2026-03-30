@@ -9,16 +9,24 @@ class Web::ProfilesController < Web::ApplicationController
                    .page(params[:page])
                    .per(20)
 
-    @aasm = Bulletin.aasm.states
+    @aasm_options = aasm_options
   end
 
-  def make_admin
+  def create
     current_user.update(admin: true)
     redirect_to profile_path, notice: t("flash.profiles.make_admin.success")
   end
 
-  def remove_admin
+  def destroy
     current_user.update(admin: false)
     redirect_to profile_path, notice: t("flash.profiles.remove_admin.success")
+  end
+
+  private
+
+  def aasm_options
+    Bulletin.aasm.states.map do |state|
+      [ I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s ]
+    end
   end
 end

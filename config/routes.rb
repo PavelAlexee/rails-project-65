@@ -6,12 +6,7 @@ Rails.application.routes.draw do
     get "auth/:provider/callback", to: "auth#callback", as: :callback_auth
     delete "auth/logout", to: "auth#destroy"
 
-    resource :profile, controller: "profiles", only: [ :show ] do
-      member do
-        patch :make_admin
-        patch :remove_admin
-      end
-    end
+    resource :profile, controller: "profiles", only: %i[ show create destroy ]
 
     resources :bulletins, only: %i[index new create edit update show] do
       member do
@@ -21,18 +16,18 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-        resources :bulletins, only: :index do
-          collection do
-            get :on_moderate
-          end
+      root "home#index"
 
-          member do
-            patch :archive
-            patch :publish
-            patch :reject
-          end
+      resources :home, only: [ :index ]
+
+      resources :bulletins, only: :index do
+        member do
+          patch :archive
+          patch :publish
+          patch :reject
         end
-        resources :categories, only: %i[index new create edit update destroy]
+      end
+      resources :categories, only: %i[index new create edit update destroy]
     end
   end
 end

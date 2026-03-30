@@ -3,37 +3,37 @@ mt-4.mb-5.pb-5
     .p-4.align-items-center.border.shadow.bg-white.rounded-3
       .row
         .p-3.p-lg-5.pt-lg-0
-          .h2.mb-4 Мои объявления
-          
+          .h2.mb-4 = t("profiles.show.title")
+
           .d-flex.justify-content-between.align-items-center.mb-3
             div
               - if current_user.admin?
-                = button_to "Убрать админа", remove_admin_profile_path, 
-                            method: :patch,
+                = button_to t("profiles.show.remove_admin"), profile_path,
+                            method: :delete,
                             class: "btn btn-sm btn-warning"
               - else
-                = button_to "Сделать админом", make_admin_profile_path, 
-                            method: :patch,
+                = button_to t("profiles.show.make_admin"), profile_path,
+                            method: :post,
                             class: "btn btn-sm btn-primary"
             div
-              = link_to "Создать новое объявление", new_bulletin_path, class: "btn btn-sm btn-success"
-          
+              = link_to t("profiles.show.create_new"), new_bulletin_path, class: "btn btn-sm btn-success"
+
           = render "web/profiles/search_form", q: @q
 
           .row.mt-5
             table.table-borderless
               thead
                 tr
-                  th Название
-                  th Состояние
-                  th Дата создания
-                  th Действия
+                  th = t("profiles.show.table.title")
+                  th = t("profiles.show.table.state")
+                  th = t("profiles.show.table.created_at")
+                  th = t("profiles.show.table.actions")
               tbody
                 - @bulletins.each do |bulletin|
                   tr
                     td.align-middle = bulletin.title
                     td.align-middle = human_state(bulletin.state)
-                    td.align-middle = bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                    td.align-middle = format_datetime(bulletin.created_at)
                     td = render partial: "web/profiles/action_buttons", locals: { bulletin: }
 
           = render "layouts/shared/paginator", object: @bulletins

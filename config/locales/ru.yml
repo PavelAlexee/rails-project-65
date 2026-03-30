@@ -1,42 +1,166 @@
-# config/locales/ru.yml
 ru:
-  aasm:
-    state:
-      bulletin:
-        draft: "Черновик"
-        under_moderation: "На модерации"
-        published: "Опубликовано"
-        rejected: "Отклонено"
-        archived: "В архиве"
+  nav:
+    home: "Главная"
+    my_bulletins: "Мои объявления"
+    admin_panel: "Админка"
+    logout: "Выход"
+    login_with_github: "Войти через GitHub"
+    greeting: "Привет, %{name}"
   
-  activerecord:
-    attributes:
-      bulletin:
+  profiles:
+    show:
+      title: "Мои объявления"
+      create_new: "Создать новое объявление"
+      make_admin: "Сделать админом"
+      remove_admin: "Убрать админа"
+      table:
         title: "Название"
-        description: "Описание"
-        image: "Изображение"
-        category: "Категория"
-      category:    
-        name: "Название категории"
-    errors:
-      messages:
-        blank: "не может быть пустым"
-        taken: "уже существует"
-        attached: "должно быть прикреплено изображение"
-      models:
-        bulletin:
-          attributes:
-            title:
-              blank: "не может быть пустым"
-            description:
-              blank: "не может быть пустым"
-            image:
-              blank: "обязательно"
-            category:
-              blank: "обязательна"
-              required: "обязательна"
+        state: "Состояние"
+        created_at: "Дата создания"
+        actions: "Действия"
   
-  # Flash сообщения
+  actions:
+    show: "Показать"
+    edit: "Редактировать"
+    to_moderate: "На модерацию"
+    archive: "В архив"
+  
+  search:
+    placeholder: "Введите ключевые слова..."
+    hint: "Искать по названию объявления"
+    by_state: "По состоянию"
+    any_state: "Любое состояние"
+    find: "Найти"
+    reset: "Сбросить"
+  
+  paginator:
+    back: "Назад"
+    forward: "Вперед"
+    
+  bulletins:
+    index:
+      title: "Все объявления"
+      empty: "Пока нет объявлений"
+      no_photo: "Нет фото"
+      no_category: "Без категории"
+      view: "Просмотр"
+    
+    show:
+      breadcrumb:
+        home: "Главная"
+        all_bulletins: "Все объявления"
+      no_image: "Нет изображения"
+      description: "Описание"
+      details: "Детали"
+      author: "Автор"
+      published_at: "Дата публикации"
+    
+    form:
+      title: "Название объявления"
+      title_placeholder: "Введите краткое название"
+      description: "Подробное описание"
+      description_placeholder: "Опишите подробно, что вы предлагаете..."
+      category: "Категория"
+      category_prompt: "-- Выберите категорию --"
+      image: "Изображение"
+      current_image: "Текущее изображение"
+      leave_blank_to_keep: "Оставьте пустым, если не хотите менять"
+      image_hint: "Максимальный размер 5MB. Разрешены форматы: JPG, PNG."
+      create: "Создать объявление"
+      update: "Обновить объявление"
+      cancel: "Отмена"
+      errors:
+        one: "ошибка"
+        few: "ошибки"
+        many: "ошибок"
+        other: "ошибок"
+        title: "при сохранении:"
+    
+    new:
+      title: "Создать новое объявление"
+    
+    edit:
+      title: "Редактировать объявление"
+    
+    search:
+      all_categories: "Все категории"
+      select_category: "Выбрать категорию"
+  
+  admin:
+    menu:
+      all_bulletins: "Все объявления"
+      all_categories: "Все категории"
+      on_moderation: "На модерации"
+    
+    home:
+      index:
+        title: "На модерации"
+        table:
+          title: "Название"
+          created_at: "Дата создания"
+          actions: "Действия"
+    
+    bulletins:
+      index:
+        title: "Объявления"
+        table:
+          title: "Название"
+          state: "Состояние"
+          created_at: "Дата создания"
+          actions: "Действия"
+      
+      action_buttons:
+        view: "Просмотр"
+        archive: "В архив"
+      
+      action_buttons_moderate:
+        view: "Просмотр"
+        publish: "Опубликовать"
+        reject: "Отклонить"
+        archive: "В архив"
+      
+      search:
+        placeholder: "Введите ключевые слова..."
+        hint: "Искать по названию объявления"
+        by_state: "По состоянию"
+        any_state: "Любое состояние"
+        find: "Найти"
+        reset: "Сбросить"
+    
+    categories:
+      index:
+        title: "Управление категориями"
+        empty: "Пока нет категорий"
+        new_category: "Новая категория"
+        table:
+          id: "ID"
+          name: "Название"
+          actions: "Действия"
+      
+      edit:
+        title: "Редактирование категории"
+        submit: "Обновить категорию"
+        cancel: "Отмена"
+      
+      new:
+        title: "Создание новой категории"
+        submit: "Создать категорию"
+        cancel: "Отмена"
+      
+      form:
+        name: "Название категории"
+        name_placeholder: "Введите краткое название"
+        errors:
+          one: "ошибка"
+          few: "ошибки"
+          many: "ошибок"
+          other: "ошибок"
+          title: "при сохранении:"
+      
+      action_buttons:
+        edit: "Редактировать"
+        delete: "Удалить"
+  
   flash:
     auth:
       success: "Успешный вход!"
@@ -79,6 +203,41 @@ ru:
       remove_admin:
         success: "Права администратора удалены"
     
-    # Общие сообщения
     auth_required: "Для выполнения этого действия необходимо войти в систему"
     access_denied: "У вас нет доступа к этой странице"
+  
+  aasm:
+    state:
+      bulletin:
+        draft: "Черновик"
+        under_moderation: "На модерации"
+        published: "Опубликовано"
+        rejected: "Отклонено"
+        archived: "В архиве"
+  
+  activerecord:
+    attributes:
+      bulletin:
+        title: "Название"
+        description: "Описание"
+        image: "Изображение"
+        category: "Категория"
+      category:    
+        name: "Название категории"
+    errors:
+      messages:
+        blank: "не может быть пустым"
+        taken: "уже существует"
+        attached: "должно быть прикреплено изображение"
+      models:
+        bulletin:
+          attributes:
+            title:
+              blank: "не может быть пустым"
+            description:
+              blank: "не может быть пустым"
+            image:
+              blank: "обязательно"
+            category:
+              blank: "обязательна"
+              required: "обязательна"

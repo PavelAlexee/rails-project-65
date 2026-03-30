@@ -1,8 +1,8 @@
 .container.mt-4
   nav(aria-label="breadcrumb")
     ol.breadcrumb
-      li.breadcrumb-item = link_to "Главная", root_path
-      li.breadcrumb-item = link_to "Все объявления", bulletins_path
+      li.breadcrumb-item = link_to t("bulletins.show.breadcrumb.home"), root_path
+      li.breadcrumb-item = link_to t("bulletins.show.breadcrumb.all_bulletins"), bulletins_path
       li.breadcrumb-item.active(aria-current="page") = @bulletin.title
 
   .card.shadow-sm
@@ -14,7 +14,7 @@
               = image_tag @bulletin.image, class: "img-fluid rounded", alt: @bulletin.title
           - else
             .no-image.bg-light.rounded.d-flex.align-items-center.justify-content-center(style="height: 400px;")
-              span.text-muted Нет изображения
+              span.text-muted = t("bulletins.show.no_image")
 
         .col-md-6.col-lg-7
           .d-flex.justify-content-between.align-items-start.mb-3
@@ -22,15 +22,15 @@
             span.badge.bg-primary.fs-6 = @bulletin.category.name if @bulletin.category
 
           .description.mb-4
-            h4.h5.mb-3 Описание
+            h4.h5.mb-3 = t("bulletins.show.description")
             p.card-text.fs-5 = simple_format(@bulletin.description)
 
           .details.card.border-0.bg-light.rounded.p-3.mb-4
-            h5.h6.mb-3.text-muted Детали
+            h5.h6.mb-3.text-muted = t("bulletins.show.details")
             .row
               .col-6.mb-2
-                strong Автор:
+                strong = t("bulletins.show.author")
                 .text-muted = @bulletin.user.name
               .col-6.mb-2
-                strong Дата публикации:
-                .text-muted = @bulletin.created_at.strftime("%d.%m.%Y %H:%M")
+                strong = t("bulletins.show.published_at")
+                .text-muted = format_datetime(@bulletin.created_at)
