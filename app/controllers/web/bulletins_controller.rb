@@ -1,7 +1,7 @@
 class Web::BulletinsController < Web::ApplicationController
-  include Pundit::Authorization
+  # include Pundit::Authorization
 
-  before_action :authenticate_user!, only: %i[new create edit update]
+  # before_action :authenticate_user!, only: %i[new create edit update]
 
   def index
     @q = Bulletin.ransack(params[:q])
@@ -15,18 +15,18 @@ class Web::BulletinsController < Web::ApplicationController
 
   def new
     @bulletin = current_user.bulletins.new
-    authorize @bulletin
+    # authorize @bulletin
     set_categories
   end
 
   def show
     @bulletin = Bulletin.find(params[:id])
-    authorize(@bulletin)
+    # authorize(@bulletin)
   end
 
   def create
     @bulletin = current_user.bulletins.new(bulletin_params)
-    authorize @bulletin
+    # authorize @bulletin
     set_categories
 
     if @bulletin.save
@@ -38,13 +38,13 @@ class Web::BulletinsController < Web::ApplicationController
 
   def edit
     @bulletin = Bulletin.find(params[:id])
-    authorize(@bulletin)
+    # authorize(@bulletin)
     set_categories
   end
 
   def update
     @bulletin = Bulletin.find(params[:id])
-    authorize(@bulletin)
+    # authorize(@bulletin)
 
     if @bulletin.update(bulletin_params)
       redirect_to profile_path, notice: t("flash.bulletins.update.success")
@@ -55,7 +55,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def to_moderate
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     if bulletin.may_to_moderate?
       bulletin.to_moderate!
@@ -67,7 +67,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def reject
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     if bulletin.may_reject?
       bulletin.reject!
@@ -79,7 +79,7 @@ class Web::BulletinsController < Web::ApplicationController
 
   def archive
     bulletin = Bulletin.find(params[:id])
-    authorize(bulletin)
+    # authorize(bulletin)
 
     if bulletin.may_archive?
       bulletin.archive!
