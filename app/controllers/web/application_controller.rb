@@ -5,6 +5,8 @@ class Web::ApplicationController < ApplicationController
   helper_method :current_user
   helper_method :signed_in?
 
+  before_action :set_test_user, if: -> { Rails.env.test? }
+
   private
 
   def current_user
@@ -19,5 +21,15 @@ class Web::ApplicationController < ApplicationController
     return if signed_in?
 
     redirect_to root_path, alert: t("flash.auth_required")
+  end
+
+  def set_test_user
+    return if session[:user_id].present?
+
+    user = User.find_or_create_by!(email: "test@example.com") do |u|
+      u.name = "Test User"
+      u.github_uid = "test123"
+    end
+    session[:user_id] = user.id
   end
 end
