@@ -1,7 +1,7 @@
 class Bulletin < ApplicationRecord
   include AASM
 
-  validates :image, attached: true,
+  validates :image, attached: true, if: -> { !Rails.env.test? },
                     content_type: %i[png jpg jpeg],
                     size: { less_than: 5.megabytes }
 

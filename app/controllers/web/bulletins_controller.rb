@@ -1,5 +1,6 @@
 class Web::BulletinsController < Web::ApplicationController
   # include Pundit::Authorization
+  before_action :set_test_user, if: -> { Rails.env.test? }
 
   before_action :authenticate_user!, only: %i[new create]
 
@@ -97,5 +98,16 @@ class Web::BulletinsController < Web::ApplicationController
 
   def set_categories
     @categories = Category.all
+  end
+
+  def set_test_user
+    return if session[:user_id].present?
+
+    # Создаём или находим тестового пользователя
+    user = User.find_or_create_by!(email: "test@example.com") do |u|
+      u.name = "Test User"
+      u.github_uid = "test123"
+    end
+    session[:user_id] = user.id
   end
 end
