@@ -14,7 +14,8 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     if @category.save
       redirect_to admin_categories_path, notice: t("flash.admin.categories.create.success")
     else
-      render :new, status: :unprocessable_entity, alert: t("flash.admin.categories.create.failure")
+      flash.now[:alert] = t("flash.admin.categories.create.failure")
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +28,8 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     if @category.update(category_params)
       redirect_to admin_categories_path, notice: t("flash.admin.categories.update.success")
     else
-      render :edit, status: :unprocessable_entity, alert: t("flash.admin.categories.update.failure")
+      flash.now[:alert] = t("flash.admin.categories.update.failure")
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -39,6 +41,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     elsif @category.destroy
       redirect_to admin_categories_path, notice: t("flash.admin.categories.destroy.success")
     else
+      flash.now[:alert] = t("flash.admin.categories.destroy.failure")
       redirect_to admin_categories_path, alert: t("flash.admin.categories.destroy.failure")
     end
   end
