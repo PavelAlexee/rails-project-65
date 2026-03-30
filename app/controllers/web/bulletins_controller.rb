@@ -1,7 +1,7 @@
 class Web::BulletinsController < Web::ApplicationController
   # include Pundit::Authorization
 
-  # before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :authenticate_user!, only: %i[new create]
 
   def index
     @q = Bulletin.ransack(params[:q])
