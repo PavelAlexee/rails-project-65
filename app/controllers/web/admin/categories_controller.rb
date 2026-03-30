@@ -50,6 +50,6 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   end
 
   def category_params
-    params.expect(category: [ :name ])
+    params.require(:category).permit(:name)
   end
 end
