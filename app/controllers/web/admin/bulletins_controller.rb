@@ -49,7 +49,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def aasm_options
     Bulletin.aasm.states.map do |state|
-      [I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+      [I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s]
     end
   end
 end
