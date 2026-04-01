@@ -13,6 +13,6 @@ Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
 Layout/SpaceInsideArrayLiteralBrackets:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: no_space
   EnforcedStyleForEmptyBrackets: no_space
