@@ -5,3 +5,5 @@ exclude:
 linters:
   LineLength:
     enabled: false
+  RuboCop:
+    enabled: false
