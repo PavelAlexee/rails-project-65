@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::BulletinsController < Web::ApplicationController
   # include Pundit::Authorization
 
@@ -49,7 +51,7 @@ class Web::BulletinsController < Web::ApplicationController
     if @bulletin.update(bulletin_params)
       redirect_to profile_path, notice: t('flash.bulletins.update.success')
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

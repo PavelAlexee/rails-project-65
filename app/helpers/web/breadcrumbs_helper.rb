@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Web::BreadcrumbsHelper
   def breadcrumb(links = [])
     content_for(:breadcrumbs) do

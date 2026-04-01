@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def index
     @categories = Category.all
@@ -15,7 +17,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
       redirect_to admin_categories_path, notice: t('flash.admin.categories.create.success')
     else
       flash.now[:alert] = t('flash.admin.categories.create.failure')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +31,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
       redirect_to admin_categories_path, notice: t('flash.admin.categories.update.success')
     else
       flash.now[:alert] = t('flash.admin.categories.update.failure')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

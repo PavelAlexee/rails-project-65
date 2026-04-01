@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   def index
     @q = Bulletin.ransack(params[:q])
@@ -47,7 +49,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
   def aasm_options
     Bulletin.aasm.states.map do |state|
-      [ I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s ]
+      [I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
     end
   end
 end

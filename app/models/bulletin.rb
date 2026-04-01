@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bulletin < ApplicationRecord
   include AASM
 
@@ -25,7 +27,7 @@ class Bulletin < ApplicationRecord
       transitions from: :draft, to: :under_moderation
     end
     event :archive do
-      transitions from: [ :draft, :under_moderation, :published, :rejected ], to: :archived
+      transitions from: [:draft, :under_moderation, :published, :rejected], to: :archived # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
     end
     event :reject do
       transitions from: :under_moderation, to: :rejected
@@ -38,10 +40,10 @@ class Bulletin < ApplicationRecord
   private
 
   def self.ransackable_attributes(auth_object = nil)
-    [ 'category_id', 'created_at', 'description', 'id', 'state', 'title', 'updated_at', 'user_id' ]
+    %w[category_id created_at description id state title updated_at user_id]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ 'category', 'image_attachment', 'image_blob', 'user' ]
+    %w[category image_attachment image_blob user]
   end
 end

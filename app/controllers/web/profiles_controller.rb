@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::ProfilesController < Web::ApplicationController
   before_action :authenticate_user!
 
@@ -26,7 +28,7 @@ class Web::ProfilesController < Web::ApplicationController
 
   def aasm_options
     Bulletin.aasm.states.map do |state|
-      [ I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s ]
+      [I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s]
     end
   end
 end
