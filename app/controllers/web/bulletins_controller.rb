@@ -15,15 +15,21 @@ class Web::BulletinsController < Web::ApplicationController
     set_categories
   end
 
+  def show
+    @bulletin = Bulletin.find(params[:id])
+    # authorize(@bulletin)
+  end
+
   def new
     @bulletin = current_user.bulletins.new
     # authorize @bulletin
     set_categories
   end
 
-  def show
+  def edit
     @bulletin = Bulletin.find(params[:id])
     # authorize(@bulletin)
+    set_categories
   end
 
   def create
@@ -36,12 +42,6 @@ class Web::BulletinsController < Web::ApplicationController
     else
       render :new, status: :unprocessable_content
     end
-  end
-
-  def edit
-    @bulletin = Bulletin.find(params[:id])
-    # authorize(@bulletin)
-    set_categories
   end
 
   def update

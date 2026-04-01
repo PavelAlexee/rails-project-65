@@ -2,7 +2,8 @@
 
 module DateHelper
   def format_datetime(datetime)
-    return '' unless datetime.present?
+    return '' if datetime.blank?
+
     datetime.strftime('%d.%m.%y %H:%M')
   end
 end
