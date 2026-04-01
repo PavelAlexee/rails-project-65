@@ -27,7 +27,7 @@ class Bulletin < ApplicationRecord
       transitions from: :draft, to: :under_moderation
     end
     event :archive do
-      transitions from: %i[draft under_moderation published rejected], to: :archived # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+      transitions from: %i[draft under_moderation published rejected], to: :archived
     end
     event :reject do
       transitions from: :under_moderation, to: :rejected
@@ -37,11 +37,11 @@ class Bulletin < ApplicationRecord
     end
   end
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(*)
     %w[category_id created_at description id state title updated_at user_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(*)
     %w[category image_attachment image_blob user]
   end
 end

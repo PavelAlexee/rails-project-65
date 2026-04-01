@@ -3,8 +3,8 @@
 class Web::Admin::HomeController < Web::Admin::ApplicationController
   def index
     @bulletins = Bulletin.under_moderation
-                      .order(created_at: :desc)
-                      .page(params[:page])
-                      .per(20)
+                         .order(created_at: :desc)
+                         .page(params[:page])
+                         .per(20)
   end
 end

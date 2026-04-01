@@ -11,6 +11,10 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     @category = Category.new
   end
 
+  def edit
+    set_category
+  end
+
   def create
     @category = Category.new(category_params)
     if @category.save
@@ -19,10 +23,6 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
       flash.now[:alert] = t('flash.admin.categories.create.failure')
       render :new, status: :unprocessable_content
     end
-  end
-
-  def edit
-    set_category
   end
 
   def update
