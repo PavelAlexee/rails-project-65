@@ -30,7 +30,7 @@ class Web::BulletinsController < Web::ApplicationController
     set_categories
 
     if @bulletin.save
-      redirect_to @bulletin, notice: t("flash.bulletins.create.success")
+      redirect_to @bulletin, notice: t('flash.bulletins.create.success')
     else
       render :new, status: :unprocessable_content
     end
@@ -47,7 +47,7 @@ class Web::BulletinsController < Web::ApplicationController
     # authorize(@bulletin)
 
     if @bulletin.update(bulletin_params)
-      redirect_to profile_path, notice: t("flash.bulletins.update.success")
+      redirect_to profile_path, notice: t('flash.bulletins.update.success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -59,9 +59,9 @@ class Web::BulletinsController < Web::ApplicationController
 
     if bulletin.may_to_moderate?
       bulletin.to_moderate!
-      redirect_to profile_path, notice: t("flash.bulletins.to_moderate.success")
+      redirect_to profile_path, notice: t('flash.bulletins.to_moderate.success')
     else
-      redirect_to profile_path, alert: t("flash.bulletins.to_moderate.failure")
+      redirect_to profile_path, alert: t('flash.bulletins.to_moderate.failure')
     end
   end
 
@@ -71,9 +71,9 @@ class Web::BulletinsController < Web::ApplicationController
 
     if bulletin.may_reject?
       bulletin.reject!
-      redirect_to profile_path, notice: t("flash.bulletins.reject.success")
+      redirect_to profile_path, notice: t('flash.bulletins.reject.success')
     else
-      redirect_to profile_path, alert: t("flash.bulletins.reject.failure")
+      redirect_to profile_path, alert: t('flash.bulletins.reject.failure')
     end
   end
 
@@ -83,9 +83,9 @@ class Web::BulletinsController < Web::ApplicationController
 
     if bulletin.may_archive?
       bulletin.archive!
-      redirect_to profile_path, notice: t("flash.bulletins.archive.success")
+      redirect_to profile_path, notice: t('flash.bulletins.archive.success')
     else
-      redirect_to profile_path, alert: t("flash.bulletins.archive.failure")
+      redirect_to profile_path, alert: t('flash.bulletins.archive.failure')
     end
   end
 

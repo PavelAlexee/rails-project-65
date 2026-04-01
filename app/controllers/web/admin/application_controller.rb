@@ -8,7 +8,7 @@ class Web::Admin::ApplicationController < Web::ApplicationController
 
   def check_admin!
     unless current_user&.admin?
-      redirect_to root_path, alert: t("flash.access_denied")
+      redirect_to root_path, alert: t('flash.access_denied')
     end
   end
 end

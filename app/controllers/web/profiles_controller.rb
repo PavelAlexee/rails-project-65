@@ -14,12 +14,12 @@ class Web::ProfilesController < Web::ApplicationController
 
   def create
     current_user.update(admin: true)
-    redirect_to profile_path, notice: t("flash.profiles.make_admin.success")
+    redirect_to profile_path, notice: t('flash.profiles.make_admin.success')
   end
 
   def destroy
     current_user.update(admin: false)
-    redirect_to profile_path, notice: t("flash.profiles.remove_admin.success")
+    redirect_to profile_path, notice: t('flash.profiles.remove_admin.success')
   end
 
   private

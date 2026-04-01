@@ -12,9 +12,9 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to admin_categories_path, notice: t("flash.admin.categories.create.success")
+      redirect_to admin_categories_path, notice: t('flash.admin.categories.create.success')
     else
-      flash.now[:alert] = t("flash.admin.categories.create.failure")
+      flash.now[:alert] = t('flash.admin.categories.create.failure')
       render :new, status: :unprocessable_entity
     end
   end
@@ -26,9 +26,9 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   def update
     set_category
     if @category.update(category_params)
-      redirect_to admin_categories_path, notice: t("flash.admin.categories.update.success")
+      redirect_to admin_categories_path, notice: t('flash.admin.categories.update.success')
     else
-      flash.now[:alert] = t("flash.admin.categories.update.failure")
+      flash.now[:alert] = t('flash.admin.categories.update.failure')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -37,12 +37,12 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
     set_category
 
     if @category.bulletins.exists?
-      redirect_to admin_categories_path, alert: t("flash.admin.categories.destroy.has_bulletins")
+      redirect_to admin_categories_path, alert: t('flash.admin.categories.destroy.has_bulletins')
     elsif @category.destroy
-      redirect_to admin_categories_path, notice: t("flash.admin.categories.destroy.success")
+      redirect_to admin_categories_path, notice: t('flash.admin.categories.destroy.success')
     else
-      flash.now[:alert] = t("flash.admin.categories.destroy.failure")
-      redirect_to admin_categories_path, alert: t("flash.admin.categories.destroy.failure")
+      flash.now[:alert] = t('flash.admin.categories.destroy.failure')
+      redirect_to admin_categories_path, alert: t('flash.admin.categories.destroy.failure')
     end
   end
 

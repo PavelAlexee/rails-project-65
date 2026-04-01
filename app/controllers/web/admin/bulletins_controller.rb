@@ -13,9 +13,9 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_publish?
       bulletin.publish!
-      redirect_to admin_home_index_path, notice: t("flash.bulletins.to_moderate.success")
+      redirect_to admin_home_index_path, notice: t('flash.bulletins.to_moderate.success')
     else
-      redirect_to admin_home_index_path, alert: t("flash.bulletins.to_moderate.failure")
+      redirect_to admin_home_index_path, alert: t('flash.bulletins.to_moderate.failure')
     end
   end
 
@@ -24,9 +24,9 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_reject?
       bulletin.reject!
-      redirect_to admin_home_index_path, notice: t("flash.bulletins.reject.success")
+      redirect_to admin_home_index_path, notice: t('flash.bulletins.reject.success')
     else
-      redirect_to admin_home_index_path, alert: t("flash.bulletins.reject.failure")
+      redirect_to admin_home_index_path, alert: t('flash.bulletins.reject.failure')
     end
   end
 
@@ -37,9 +37,9 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
 
     if bulletin.may_archive?
       bulletin.archive!
-      redirect_to return_path, notice: t("flash.bulletins.archive.success")
+      redirect_to return_path, notice: t('flash.bulletins.archive.success')
     else
-      redirect_to return_path, alert: t("flash.bulletins.archive.failure")
+      redirect_to return_path, alert: t('flash.bulletins.archive.failure')
     end
   end
 

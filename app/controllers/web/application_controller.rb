@@ -22,15 +22,15 @@ class Web::ApplicationController < ApplicationController
   def authenticate_user!
     return if signed_in?
 
-    redirect_to root_path, alert: t("flash.auth_required")
+    redirect_to root_path, alert: t('flash.auth_required')
   end
 
   def set_test_user
     return if session[:user_id].present?
 
-    user = User.find_or_create_by!(email: "test@example.com") do |u|
-      u.name = "Test User"
-      u.github_uid = "test123"
+    user = User.find_or_create_by!(email: 'test@example.com') do |u|
+      u.name = 'Test User'
+      u.github_uid = 'test123'
     end
     session[:user_id] = user.id
   end
