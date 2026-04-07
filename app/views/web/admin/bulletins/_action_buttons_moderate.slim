@@ -11,7 +11,7 @@
                           form_class: "d-inline"
 - unless bulletin.archived?
   = button_to t("admin.bulletins.action_buttons_moderate.archive"), archive_admin_bulletin_path(bulletin,
-                        return_to: admin_home_index_path),
+                        return_to: admin_root_path),
                         method: :patch,
                         class: "btn btn-sm btn-outline-danger me-1",
                         form_class: "d-inline"

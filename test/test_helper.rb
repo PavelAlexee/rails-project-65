@@ -36,4 +36,15 @@ class ActionDispatch::IntegrationTest
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
+
+  def create_bulletin_with_image(attributes = {})
+    bulletin = Bulletin.new(attributes)
+    bulletin.image.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/test.png")),
+      filename: "test.png",
+      content_type: "image/png"
+    )
+    bulletin.save!
+    bulletin
+  end
 end

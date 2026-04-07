@@ -7,5 +7,5 @@
       = link_to t("admin.menu.all_categories"), admin_categories_path,
         class: "nav-link #{'active' if current_page?(admin_categories_path)}"
     li.nav-item
-      = link_to t("admin.menu.on_moderation"), admin_home_index_path,
-        class: "nav-link #{'active' if current_page?(admin_home_index_path)}"
+      = link_to t("admin.menu.on_moderation"), admin_root_path,
+        class: "nav-link #{'active' if current_page?(admin_root_path)}"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   scope module: :web do
     root "bulletins#index"
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
     get "auth/:provider/callback", to: "auth#callback", as: :callback_auth
     delete "auth/logout", to: "auth#destroy"
 
-    resource :profile, controller: "profiles", only: %i[ show create destroy ]
+    resource :profile, controller: "profiles", only: %i[show create destroy]
 
     resources :bulletins, only: %i[index new create edit update show] do
       member do
@@ -17,8 +19,6 @@ Rails.application.routes.draw do
 
     namespace :admin do
       root "home#index"
-
-      resources :home, only: [ :index ]
 
       resources :bulletins, only: :index do
         member do
