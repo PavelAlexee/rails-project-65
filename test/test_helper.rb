@@ -13,22 +13,15 @@ module ActiveSupport
   end
 end
 
-ActionDispatch::IntegrationTest.class_eval do
+class ActionDispatch::IntegrationTest
+  # Упрощённый метод sign_in - напрямую устанавливаем сессию
   def sign_in(user)
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
-      provider: 'github',
-      uid: user.github_uid,
-      info: {
-        email: user.email,
-        name: user.name
-      }
-    )
+    # Прямая установка пользователя в сессию
+    session[:user_id] = user.id
+  end
 
-    get callback_auth_path('github')
-
-    follow_redirect!
-
-    puts "After sign_in - session user_id: #{session[:user_id]}" if ENV['DEBUG']
+  def sign_out
+    session[:user_id] = nil
   end
 
   def signed_in?
