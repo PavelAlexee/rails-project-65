@@ -13,10 +13,9 @@ module ActiveSupport
   end
 end
 
-class ActionDispatch::IntegrationTest
-  # Упрощённый метод sign_in - напрямую устанавливаем сессию
+# Используем class_eval вместо определения класса
+ActionDispatch::IntegrationTest.class_eval do
   def sign_in(user)
-    # Прямая установка пользователя в сессию
     session[:user_id] = user.id
   end
 
