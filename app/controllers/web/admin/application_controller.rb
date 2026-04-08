@@ -1,10 +1,6 @@
-# frozen_string_literal: true
-
 class Web::Admin::ApplicationController < Web::ApplicationController
-  # before_action :check_admin!
-  # before_action :authenticate_user!
-
-  helper_method :check_admin!
+  before_action :authenticate_user!
+  before_action :check_admin!
 
   private
 
