@@ -22,7 +22,7 @@ gem 'rails', '~> 8.1.2'
 gem 'ransack'
 # gem 'rubocop-rails-omakase', require: false
 gem 'simple_form'
-gem 'slim-rails'
+# gem 'slim-rails'
 gem 'solid_cable'
 gem 'solid_cache'
 gem 'solid_queue'
