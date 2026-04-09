@@ -20,7 +20,7 @@ gem 'puma', '>= 5.0'
 gem 'pundit'
 gem 'rails', '~> 8.1.2'
 gem 'ransack'
-gem 'rubocop-rails-omakase', require: false
+# gem 'rubocop-rails-omakase', require: false
 gem 'simple_form'
 gem 'slim-rails'
 gem 'solid_cable'
