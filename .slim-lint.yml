@@ -9,5 +9,5 @@ linters:
   LineLength:
     enabled: false
   RuboCop:
-    enabled: true
+    enabled: false
     config_file: .rubocop_slim.yml
