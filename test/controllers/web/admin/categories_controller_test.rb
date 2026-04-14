@@ -6,6 +6,7 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin = users(:john)
     @category = categories(:electronics)
+    @empty_category = categories(:automotive)
   end
 
   test "should get index" do
@@ -46,10 +47,9 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy category" do
     sign_in(@admin)
-    empty_category = Category.create!(name: "Empty Category")
 
     assert_difference("Category.count", -1) do
-      delete admin_category_path(empty_category)
+      delete admin_category_path(@empty_category)
     end
     assert_redirected_to admin_categories_path
     assert_equal I18n.t("flash.admin.categories.destroy.success"), flash[:notice]

@@ -1,7 +1,7 @@
 require "test_helper"
 
 class Web::Admin::HomeControllerTest < ActionDispatch::IntegrationTest
-   setup do
+  setup do
     @admin = users(:john)
   end
 

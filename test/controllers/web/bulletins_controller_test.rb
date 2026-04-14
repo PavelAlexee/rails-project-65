@@ -7,7 +7,15 @@ class Web::BulletinsinsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:john)
     @category = categories(:electronics)
     @published_bulletin = bulletins(:iphone)
-    @draft_bulletin = bulletins(:macbook)
+    @draft_bulletin = bulletins(:novel)
+    @valid_bulletin_params = {
+      title: "Test Bulletin",
+      description: "Test Description",
+      category_id: @category.id
+    }
+    @update_bulletin_params = {
+      title: "Updated Title"
+    }
   end
 
   test "should get index" do
@@ -15,15 +23,7 @@ class Web::BulletinsinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
   test "should show published bulletin" do
-    published_bulletin = Bulletin.create!(
-      title: "Published Bulletin",
-      description: "Test Description",
-      category: @category,
-      user: @user,
-      state: :published
-    )
-
-    get bulletin_path(published_bulletin)
+    get bulletin_path(@published_bulletin)
     assert_response :success
   end
 
@@ -43,13 +43,7 @@ class Web::BulletinsinsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user)
 
     assert_difference("Bulletin.count", 1) do
-      post bulletins_path, params: {
-        bulletin: {
-          title: "Test Bulletin",
-          description: "Test Description",
-          category_id: @category.id
-        }
-      }
+      post bulletins_path, params: { bulletin: @valid_bulletin_params }
     end
 
     bulletin = Bulletin.last
@@ -59,90 +53,51 @@ class Web::BulletinsinsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create bulletin when not authenticated" do
     assert_no_difference("Bulletin.count") do
-      post bulletins_path, params: {
-        bulletin: {
-          title: "Test Bulletin",
-          description: "Test Description",
-          category_id: @category.id
-        }
-      }
+      post bulletins_path, params: { bulletin: @valid_bulletin_params }
     end
     assert_redirected_to root_path
     assert_equal I18n.t("flash.auth_required"), flash[:alert]
   end
 
-  # Тест для edit
   test "should get edit when owner" do
     sign_in(@user)
-    bulletin = Bulletin.create!(
-      title: "My Bulletin",
-      description: "My Description",
-      category: @category,
-      user: @user,
-      state: :draft
-    )
 
-    get edit_bulletin_path(bulletin)
+    get edit_bulletin_path(@draft_bulletin)
     assert_response :success
   end
 
   test "should update bulletin when owner" do
     sign_in(@user)
-    bulletin = Bulletin.create!(
-      title: "Original Title",
-      description: "Original Description",
-      category: @category,
-      user: @user,
-      state: :draft
-    )
 
-    patch bulletin_path(bulletin), params: {
-      bulletin: {
-        title: "Updated Title"
-      }
-    }
+    patch bulletin_path(@draft_bulletin), params: { bulletin: @update_bulletin_params }
 
     assert_redirected_to profile_path
     assert_equal I18n.t("flash.bulletins.update.success"), flash[:notice]
-    bulletin.reload
-    assert_equal "Updated Title", bulletin.title
+    @draft_bulletin.reload
+    assert_equal "Updated Title", @draft_bulletin.title
   end
 
   test "should send bulletin to moderation" do
     sign_in(@user)
-    bulletin = Bulletin.create!(
-      title: "Draft Bulletin",
-      description: "Draft Description",
-      category: @category,
-      user: @user,
-      state: :draft
-    )
 
-    assert bulletin.may_to_moderate?
-    patch to_moderate_bulletin_path(bulletin)
+    assert @draft_bulletin.may_to_moderate?
+    patch to_moderate_bulletin_path(@draft_bulletin)
 
     assert_redirected_to profile_path
     assert_equal I18n.t("flash.bulletins.to_moderate.success"), flash[:notice]
-    bulletin.reload
-    assert bulletin.under_moderation?
+    @draft_bulletin.reload
+    assert @draft_bulletin.under_moderation?
   end
 
   test "should archive bulletin" do
     sign_in(@user)
-    bulletin = Bulletin.create!(
-      title: "Active Bulletin",
-      description: "Active Description",
-      category: @category,
-      user: @user,
-      state: :published
-    )
 
-    assert bulletin.may_archive?
-    patch archive_bulletin_path(bulletin)
+    assert @published_bulletin.may_archive?
+    patch archive_bulletin_path(@published_bulletin)
 
     assert_redirected_to profile_path
     assert_equal I18n.t("flash.bulletins.archive.success"), flash[:notice]
-    bulletin.reload
-    assert bulletin.archived?
+    @published_bulletin.reload
+    assert @published_bulletin.archived?
   end
 end
