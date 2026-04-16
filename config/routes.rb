@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   scope module: :web do
     root 'bulletins#index'
@@ -19,8 +21,6 @@ Rails.application.routes.draw do
 
     namespace :admin do
       root 'home#index'
-
-      resources :home, only: [:index]
 
       resources :bulletins, only: :index do
         member do

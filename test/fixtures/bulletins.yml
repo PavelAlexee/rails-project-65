@@ -3,6 +3,7 @@ iphone:
   description: Отличный телефон в идеальном состоянии. Использовался полгода.
   category: electronics
   user: john
+  state: published 
   created_at: <%= 2.days.ago %>
 
 macbook:
@@ -10,11 +11,13 @@ macbook:
   description: Продаю MacBook Pro с процессором M1. 16 ГБ RAM, 512 ГБ SSD.
   category: electronics
   user: jane
+  state: :under_moderation  
   created_at: <%= 1.day.ago %>
 
 novel:
   title: Книга "Война и мир"
   description: Классика русской литературы. Отличное состояние.
   category: books
-  user: jane
+  user: john
+  state: :draft
   created_at: <%= 3.hours.ago %>

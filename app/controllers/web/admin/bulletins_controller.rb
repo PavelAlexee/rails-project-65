@@ -9,7 +9,7 @@ module Web
                        .order(created_at: :desc)
                        .page(params[:page])
                        .per(20)
-        @aasm = aasm_options
+        @aasm_options = aasm_options
       end
 
       def publish
@@ -17,9 +17,9 @@ module Web
 
         if bulletin.may_publish?
           bulletin.publish!
-          redirect_to admin_home_index_path, notice: t('flash.bulletins.to_moderate.success')
+          redirect_to admin_root_path, notice: t('flash.bulletins.to_moderate.success')
         else
-          redirect_to admin_home_index_path, alert: t('flash.bulletins.to_moderate.failure')
+          redirect_to admin_root_path, alert: t('flash.bulletins.to_moderate.failure')
         end
       end
 
@@ -28,16 +28,16 @@ module Web
 
         if bulletin.may_reject?
           bulletin.reject!
-          redirect_to admin_home_index_path, notice: t('flash.bulletins.reject.success')
+          redirect_to admin_root_path, notice: t('flash.bulletins.reject.success')
         else
-          redirect_to admin_home_index_path, alert: t('flash.bulletins.reject.failure')
+          redirect_to admin_root_path, alert: t('flash.bulletins.reject.failure')
         end
       end
 
       def archive
         bulletin = Bulletin.find(params[:id])
 
-        return_path = params[:return_to].presence || root_path
+        return_path = params[:return_to].presence || admin_root_path
 
         if bulletin.may_archive?
           bulletin.archive!
