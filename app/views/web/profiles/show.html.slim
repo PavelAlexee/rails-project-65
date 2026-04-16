@@ -34,6 +34,6 @@ mt-4.mb-5.pb-5
                     td.align-middle = bulletin.title
                     td.align-middle = human_state(bulletin.state)
                     td.align-middle = format_datetime(bulletin.created_at)
-                    td = render partial: 'web/profiles/action_buttons', locals: { bulletin: }
+                    td = render 'web/profiles/action_buttons', locals: { bulletin: bulletin }
 
           = render 'layouts/shared/paginator', object: @bulletins

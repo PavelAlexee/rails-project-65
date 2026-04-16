@@ -15,6 +15,6 @@
               tr
                 td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
                 td.align-middle = format_datetime(bulletin.created_at)
-                td = render partial: 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: }
+                td = render 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: bulletin }
 
       = render 'layouts/shared/paginator', object: @bulletins

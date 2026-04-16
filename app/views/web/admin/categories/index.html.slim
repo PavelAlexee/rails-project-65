@@ -20,6 +20,6 @@
                 tr
                   td.align-middle = category.id
                   td.align-middle = category.name
-                  td = render partial: 'web/admin/categories/action_buttons', locals: { category: }
+                  td = render 'web/admin/categories/action_buttons', locals: { category: category }
 
         = render 'layouts/shared/paginator', object: @categories
