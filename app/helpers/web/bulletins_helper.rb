@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Web::BulletinsHelper
+module Web
+  module BulletinsHelper
+  end
 end

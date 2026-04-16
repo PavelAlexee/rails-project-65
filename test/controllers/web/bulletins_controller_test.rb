@@ -2,8 +2,10 @@
 
 require 'test_helper'
 
-class Web::BulletinsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+module Web
+  class BulletinsControllerTest < ActionDispatch::IntegrationTest
+    # test "the truth" do
+    #   assert true
+    # end
+  end
 end

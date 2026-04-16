@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Web::UsersHelper
+module Web
+  module UsersHelper
+  end
 end

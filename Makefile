@@ -21,5 +21,8 @@ test_integration:
 lint-rubocop:
 	bundle exec rubocop
 
+lint-slim:
+	bundle exec slim-lint app/views
+
 lint-rubocop-fix:
 	bundle exec rubocop -A

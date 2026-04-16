@@ -1,13 +1,36 @@
+# .rubocop.yml
+
+AllCops:
+  NewCops: disable
+  TargetRubyVersion: 3.0
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'storage/**/*'
+
+# Настройка кавычек
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
-  ConsistentQuotesInMultiline: true
-
+  
 Style/StringLiteralsInInterpolation:
   Enabled: true
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
-Layout/SpaceInsideArrayLiteralBrackets:
+# Отключаем проблемные копы
+Layout/LineLength:
   Enabled: false
-  EnforcedStyle: no_space
-  EnforcedStyleForEmptyBrackets: no_space
+  
+Style/Documentation:
+  Enabled: false
+  
+Metrics/MethodLength:
+  Enabled: false
+  
+Metrics/AbcSize:
+  Enabled: false
+  

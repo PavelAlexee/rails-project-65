@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-module Web::Admin::HomeHelper
+module Web
+  module Admin
+    module HomeHelper
+    end
+  end
 end

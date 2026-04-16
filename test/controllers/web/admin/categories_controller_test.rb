@@ -2,8 +2,12 @@
 
 require 'test_helper'
 
-class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+module Web
+  module Admin
+    class CategoriesControllerTest < ActionDispatch::IntegrationTest
+      # test "the truth" do
+      #   assert true
+      # end
+    end
+  end
 end

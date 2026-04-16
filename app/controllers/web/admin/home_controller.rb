@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-class Web::Admin::HomeController < Web::Admin::ApplicationController
-  def index
-    @bulletins = Bulletin.under_moderation
-                         .order(created_at: :desc)
-                         .page(params[:page])
-                         .per(20)
+module Web
+  module Admin
+    class HomeController < Web::Admin::ApplicationController
+      def index
+        @bulletins = Bulletin.under_moderation
+                             .order(created_at: :desc)
+                             .page(params[:page])
+                             .per(20)
+      end
+    end
   end
 end
