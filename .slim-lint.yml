@@ -1,7 +1,13 @@
+skip_frontmatter: true
 exclude:
-  - vendor/*
-  - node_modules/*
+  - 'node_modules/*'
+  - 'vendor/**/*'
+  - 'app/views/layouts/mailer.html.slim'
+  - 'app/views/layouts/mailer.text.slim'  
 
 linters:
   LineLength:
     enabled: false
+  RuboCop:
+    enabled: false
+    config_file: .rubocop_slim.yml

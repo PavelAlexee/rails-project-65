@@ -1,6 +1,8 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
+# frozen_string_literal: true
+
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
 
 OmniAuth.config.test_mode = true
 
@@ -11,10 +13,10 @@ module ActiveSupport
   end
 end
 
-class ActionDispatch::IntegrationTest
+ActionDispatch::IntegrationTest.class_eval do
   def sign_in(user)
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
-      provider: "github",
+      provider: 'github',
       uid: user.github_uid,
       info: {
         email: user.email,
@@ -22,11 +24,11 @@ class ActionDispatch::IntegrationTest
       }
     )
 
-    get callback_auth_path("github")
+    get callback_auth_path('github')
 
     follow_redirect!
 
-    puts "After sign_in - session user_id: #{session[:user_id]}" if ENV["DEBUG"]
+    puts "After sign_in - session user_id: #{session[:user_id]}" if ENV['DEBUG']
   end
 
   def signed_in?

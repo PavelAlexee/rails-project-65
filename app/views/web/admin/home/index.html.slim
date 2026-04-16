@@ -1,21 +1,20 @@
 .container
   .row
-    = render "web/admin/shared/menu"
+    = render 'web/admin/shared/menu'
     .col-md-9
-      .h2.mb-4 = t("admin.home.index.title")
+      .h2.mb-4 = t('admin.home.index.title')
       .row.mt-2
         table.table
           thead
             tr
-              th.w-25 = t("admin.home.index.table.title")
-              th.w-25 = t("admin.home.index.table.created_at")
-              th.w-25 = t("admin.home.index.table.actions")
+              th.w-25 = t('admin.home.index.table.title')
+              th.w-25 = t('admin.home.index.table.created_at')
+              th.w-25 = t('admin.home.index.table.actions')
           tbody
             - @bulletins.each do |bulletin|
               tr
-                td.align-middle = link_to bulletin.title,
-                                        bulletin_path(bulletin)
+                td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
                 td.align-middle = format_datetime(bulletin.created_at)
-                td = render partial: "web/admin/bulletins/action_buttons_moderate", locals: { bulletin: }
+                td = render 'web/admin/bulletins/action_buttons_moderate', bulletin: bulletin
 
-      = render "layouts/shared/paginator", object: @bulletins
+      = render 'layouts/shared/paginator', object: @bulletins

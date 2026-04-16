@@ -1,66 +1,56 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "rails", "~> 8.1.2"
-gem "propshaft"
-gem "puma", ">= 5.0"
-gem "jsbundling-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-gem "cssbundling-rails"
-gem "jbuilder"
+source 'https://rubygems.org'
 
-# gem "bcrypt", "~> 3.1.7"
-
-gem "tzinfo-data", platforms: %i[ windows jruby ]
-
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
-
-gem "bootsnap", require: false
-gem "kamal", require: false
-gem "thruster", require: false
-gem "image_processing", "~> 1.2"
-
-gem "simple_form"
-gem "slim-rails"
-
-gem "omniauth"
-gem "omniauth-github"
-gem "omniauth-rails_csrf_protection"
-gem "active_storage_validations"
-gem "pundit"
-gem "aasm"
-gem "ransack"
-gem "kaminari"
+gem 'aasm'
+gem 'active_storage_validations'
+gem 'bootsnap', require: false
+gem 'cssbundling-rails'
+gem 'image_processing', '~> 1.2'
+gem 'jbuilder'
+gem 'jsbundling-rails'
+gem 'kamal', require: false
+gem 'kaminari'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
+gem 'pg', group: :production
+gem 'propshaft'
+gem 'puma', '>= 5.0'
+gem 'pundit'
+gem 'rails', '~> 8.1.2'
+gem 'ransack'
+gem 'simple_form'
+gem 'slim-rails'
+gem 'solid_cable'
+gem 'solid_cache'
+gem 'solid_queue'
+gem 'stimulus-rails'
+gem 'thruster', require: false
+gem 'turbo-rails'
+gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "bundler-audit", require: false
-  gem "brakeman", "~> 8.0", require: false
-  gem "rubocop-rails-omakase", require: false
-
-  gem "sqlite3", ">= 2.1"
-  gem "faker"
-  gem "minitest-power_assert"
-  gem "rubocop"
-  gem "rubocop-minitest"
-  gem "rubocop-performance"
-  gem "rubocop-rails"
-  gem "slim_lint"
-  gem "dotenv-rails"
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+  gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'dotenv-rails'
+  gem 'faker'
+  gem 'minitest-power_assert'
+  gem 'rubocop'
+  gem 'rubocop-minitest'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'slim_lint'
+  gem 'sqlite3', '>= 2.1'
 end
 
 group :development do
-  gem "web-console"
+  gem 'web-console'
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "rails-controller-testing"
-end
-
-group :production do
-  gem "pg"
+  gem 'capybara'
+  gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
 end

@@ -1,32 +1,36 @@
-class Web::ProfilesController < Web::ApplicationController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  def show
-    @q = current_user.bulletins.ransack(params[:q])
+module Web
+  class ProfilesController < Web::ApplicationController
+    before_action :authenticate_user!
 
-    @bulletins = @q.result(distinct: true)
-                   .order(created_at: :desc)
-                   .page(params[:page])
-                   .per(20)
+    def show
+      @q = current_user.bulletins.ransack(params[:q])
 
-    @aasm_options = aasm_options
-  end
+      @bulletins = @q.result(distinct: true)
+                     .order(created_at: :desc)
+                     .page(params[:page])
+                     .per(20)
 
-  def create
-    current_user.update(admin: true)
-    redirect_to profile_path, notice: t("flash.profiles.make_admin.success")
-  end
+      @aasm_options = aasm_options
+    end
 
-  def destroy
-    current_user.update(admin: false)
-    redirect_to profile_path, notice: t("flash.profiles.remove_admin.success")
-  end
+    def create
+      current_user.update(admin: true)
+      redirect_to profile_path, notice: t('flash.profiles.make_admin.success')
+    end
 
-  private
+    def destroy
+      current_user.update(admin: false)
+      redirect_to profile_path, notice: t('flash.profiles.remove_admin.success')
+    end
 
-  def aasm_options
-    Bulletin.aasm.states.map do |state|
-      [ I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s ]
+    private
+
+    def aasm_options
+      Bulletin.aasm.states.map do |state|
+        [I18n.t("aasm.state.bulletin.#{state.name}"), state.name.to_s]
+      end
     end
   end
 end

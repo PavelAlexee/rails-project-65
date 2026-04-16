@@ -1,27 +1,25 @@
 .container
   .row
-    = render "web/admin/shared/menu"
+    = render 'web/admin/shared/menu'
     .col-md-9
-      .h2.mb-4 = t("admin.categories.index.title")
-      = link_to t("admin.categories.index.new_category"), new_admin_category_path,
-                                  class: "link-primary"
+      .h2.mb-4 = t('admin.categories.index.title')
+      = link_to t('admin.categories.index.new_category'), new_admin_category_path, class: 'link-primary'
       - if @categories.empty?
         .text-center.py-5
-          h3 = t("admin.categories.index.empty")
+          h3 = t('admin.categories.index.empty')
       - else
         .row.mt-2
           table.table
             thead
               tr
-                th.w-25 = t("admin.categories.index.table.id")
-                th.w-25 = t("admin.categories.index.table.name")
-                th.w-25 = t("admin.categories.index.table.actions")
+                th.w-25 = t('admin.categories.index.table.id')
+                th.w-25 = t('admin.categories.index.table.name')
+                th.w-25 = t('admin.categories.index.table.actions')
             tbody
               - @categories.each do |category|
                 tr
                   td.align-middle = category.id
                   td.align-middle = category.name
-                  td = render partial: "web/admin/categories/action_buttons",
-                                      locals: { category: }
+                  td = render 'web/admin/categories/action_buttons', category: category
 
-        = render "layouts/shared/paginator", object: @categories
+        = render 'layouts/shared/paginator', object: @categories

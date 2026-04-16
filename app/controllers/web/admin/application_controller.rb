@@ -1,14 +1,18 @@
-class Web::Admin::ApplicationController < Web::ApplicationController
-  before_action :check_admin!
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  helper_method :check_admin!
+module Web
+  module Admin
+    class ApplicationController < Web::ApplicationController
+      before_action :authenticate_user!
+      before_action :check_admin!
 
-  private
+      private
 
-  def check_admin!
-    unless current_user&.admin?
-      redirect_to root_path, alert: t("flash.access_denied")
+      def check_admin!
+        return if current_user&.admin?
+
+        redirect_to root_path, alert: t('flash.access_denied')
+      end
     end
   end
 end

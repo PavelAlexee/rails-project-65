@@ -1,23 +1,23 @@
 .p-4.bg-light
   = search_form_for q, url: admin_bulletins_path,
                       method: :get,
-                      html: { class: "row g-3" } do |f|
+                      html: { class: 'row g-3' } do |f|
     .col-md-6
       = f.search_field :title_or_description_cont,
-                        class: "form-control",
-                        placeholder: t("admin.bulletins.search.placeholder")
-      small.form-text.text-muted = t("admin.bulletins.search.hint")
+                        class: 'form-control',
+                        placeholder: t('admin.bulletins.search.placeholder')
+      small.form-text.text-muted = t('admin.bulletins.search.hint')
 
     .col-md-3
       = f.select :state_eq,
-                  options_for_select(@aasm_options, params.dig(:q, :state_eq)),
-                  { include_blank: t("admin.bulletins.search.any_state") },
-                  class: "form-select"
-      small.form-text.text-muted = t("admin.bulletins.search.by_state")
+                  options_for_select(@aasm, params.dig(:q, :state_eq)),
+                  { include_blank: t('admin.bulletins.search.any_state') },
+                  class: 'form-select'
+      small.form-text.text-muted = t('admin.bulletins.search.by_state')
 
     .col-md-2
       .d-flex.gap-2
-        = f.submit t("admin.bulletins.search.find"), class: "btn btn-primary"
-        = link_to t("admin.bulletins.search.reset"), admin_bulletins_path,
-                              class: "btn btn-outline-secondary"
+        = f.submit t('admin.bulletins.search.find'), class: 'btn btn-primary'
+        = link_to t('admin.bulletins.search.reset'), admin_bulletins_path,
+                              class: 'btn btn-outline-secondary'
     hr

@@ -1,19 +1,19 @@
 .container
   .row
-    = render "web/admin/shared/menu"
+    = render 'web/admin/shared/menu'
     .col-md-9
-      .h2.mb-4 = t("admin.categories.edit.title")
+      .h2.mb-4 = t('admin.categories.edit.title')
       = simple_form_for @category, url: admin_category_path(@category),
                                   method: :patch do |f|
           = f.input :name,
-            label: t("admin.categories.form.name"),
-            placeholder: t("admin.categories.form.name_placeholder"),
+            label: t('admin.categories.form.name'),
+            placeholder: t('admin.categories.form.name_placeholder'),
             required: true,
-            wrapper_html: { class: "mb-4" },
-            input_html: { rows: 5, class: "form-control" }
+            wrapper_html: { class: 'mb-4' },
+            input_html: { rows: 5, class: 'form-control' }
 
           .d-grid.gap-2.d-md-flex.justify-content-md-start.mt-4.pt-3.border-top
-            = f.button :submit, t("admin.categories.edit.submit"),
-              class: "btn btn-primary px-4"
-            = link_to t("admin.categories.edit.cancel"), admin_categories_path,
-                                class: "btn btn-outline-secondary me-2"
+            = f.button :submit, t('admin.categories.edit.submit'),
+              class: 'btn btn-primary px-4'
+            = link_to t('admin.categories.edit.cancel'), admin_categories_path,
+                                class: 'btn btn-outline-secondary me-2'

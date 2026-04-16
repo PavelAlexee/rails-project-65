@@ -4,11 +4,11 @@
       ul.pagination.pagination-sm
         - if object.prev_page
           li.page-item
-            = link_to url_for(page: object.prev_page), class: "page-link" do
-              span &larr; #{t("paginator.back")}
+            = link_to url_for(page: object.prev_page), class: 'page-link' do
+              span &larr; #{t('paginator.back')}
         - else
           li.page-item.disabled
-            span.page-link &larr; #{t("paginator.back")}
+            span.page-link &larr; #{t('paginator.back')}
 
         li.page-item.disabled
           span.page-link
@@ -18,8 +18,8 @@
 
         - if object.next_page
           li.page-item
-            = link_to url_for(page: object.next_page), class: "page-link" do
-              span #{t("paginator.forward")} &rarr;
+            = link_to url_for(page: object.next_page), class: 'page-link' do
+              span #{t('paginator.forward')} &rarr;
         - else
           li.page-item.disabled
-            span.page-link #{t("paginator.forward")} &rarr;
+            span.page-link #{t('paginator.forward')} &rarr;

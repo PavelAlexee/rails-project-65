@@ -2,13 +2,13 @@
 
 Rails.application.routes.draw do
   scope module: :web do
-    root "bulletins#index"
+    root 'bulletins#index'
 
-    post "auth/:provider", to: "auth#request", as: :auth_request
-    get "auth/:provider/callback", to: "auth#callback", as: :callback_auth
-    delete "auth/logout", to: "auth#destroy"
+    post 'auth/:provider', to: 'auth#request', as: :auth_request
+    get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
+    delete 'auth/logout', to: 'auth#destroy'
 
-    resource :profile, controller: "profiles", only: %i[show create destroy]
+    resource :profile, controller: 'profiles', only: %i[show create destroy]
 
     resources :bulletins, only: %i[index new create edit update show] do
       member do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      root "home#index"
+      root 'home#index'
 
       resources :bulletins, only: :index do
         member do

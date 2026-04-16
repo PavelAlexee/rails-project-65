@@ -1,5 +1,3 @@
-CATEGORYS = [ 'Электроника', 'Книги', 'Мебель', 'Одежда' ]
+# frozen_string_literal: true
 
-CATEGORYS.each do |categoty|
-  Category.create(name: categoty)
-end
+# Seeds for development and test environment
