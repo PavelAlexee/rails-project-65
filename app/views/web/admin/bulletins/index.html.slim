@@ -1,19 +1,19 @@
 .container
   .row
-    = render "web/admin/shared/menu"
+    = render 'web/admin/shared/menu'
     .col-md-9
-      .h2.mb-4 = t("admin.bulletins.index.title")
+      .h2.mb-4 = t('admin.bulletins.index.title')
 
       .card.mb-4.shadow-sm
         .card-body
-          = render "web/admin/bulletins/search_form", q: @q
+          = render 'web/admin/bulletins/search_form', q: @q
           table.table.table-hover.mb-0
             thead
               tr
-                th.w-25 = t("admin.bulletins.index.table.title")
-                th.w-25 = t("admin.bulletins.index.table.state")
-                th.w-25 = t("admin.bulletins.index.table.created_at")
-                th.w-25 = t("admin.bulletins.index.table.actions")
+                th.w-25 = t('admin.bulletins.index.table.title')
+                th.w-25 = t('admin.bulletins.index.table.state')
+                th.w-25 = t('admin.bulletins.index.table.created_at')
+                th.w-25 = t('admin.bulletins.index.table.actions')
             tbody
               - @bulletins.each do |bulletin|
                 tr
@@ -21,8 +21,8 @@
                                               bulletin_path(bulletin)
                   td.align-middle = human_state(bulletin.state)
                   td.align-middle = format_datetime(bulletin.created_at)
-                  td = render partial: "web/admin/bulletins/action_buttons",
+                  td = render partial: 'web/admin/bulletins/action_buttons',
                                       locals: { bulletin: }
-            .d-flex.justify-content-center.mt-4
+          .d-flex.justify-content-center.mt-4
 
-        = render "layouts/shared/paginator", object: @bulletins
+      = render 'layouts/shared/paginator', object: @bulletins

@@ -1,9 +1,9 @@
 .container.mt-4
-  nav(aria-label="breadcrumb")
+  nav(aria-label='breadcrumb')
     ol.breadcrumb
-      li.breadcrumb-item = link_to t("bulletins.show.breadcrumb.home"), root_path
-      li.breadcrumb-item = link_to t("bulletins.show.breadcrumb.all_bulletins"), bulletins_path
-      li.breadcrumb-item.active(aria-current="page") = @bulletin.title
+      li.breadcrumb-item = link_to t('bulletins.show.breadcrumb.home'), root_path
+      li.breadcrumb-item = link_to t('bulletins.show.breadcrumb.all_bulletins'), bulletins_path
+      li.breadcrumb-item.active(aria-current='page') = @bulletin.title
 
   .card.shadow-sm
     .card-body
@@ -11,26 +11,26 @@
         .col-md-6.col-lg-5.mb-4.mb-md-0
           - if @bulletin.image.attached?
             .main-image.mb-3
-              = image_tag @bulletin.image, class: "img-fluid rounded", alt: @bulletin.title
+              = image_tag @bulletin.image, class: 'img-fluid rounded', alt: @bulletin.title
           - else
-            .no-image.bg-light.rounded.d-flex.align-items-center.justify-content-center(style="height: 400px;")
-              span.text-muted = t("bulletins.show.no_image")
+            .no-image.bg-light.rounded.d-flex.align-items-center.justify-content-center(style='height: 400px;')
+              span.text-muted = t('bulletins.show.no_image')
 
         .col-md-6.col-lg-7
           .d-flex.justify-content-between.align-items-start.mb-3
             h1.card-title.h2.mb-0 = @bulletin.title
-            span.badge.bg-primary.fs-6 = @bulletin.category.name if @bulletin.category
+            span.badge.bg-primary.fs-6 = @bulletin.category&.name
 
           .description.mb-4
-            h4.h5.mb-3 = t("bulletins.show.description")
+            h4.h5.mb-3 = t('bulletins.show.description')
             p.card-text.fs-5 = simple_format(@bulletin.description)
 
           .details.card.border-0.bg-light.rounded.p-3.mb-4
-            h5.h6.mb-3.text-muted = t("bulletins.show.details")
+            h5.h6.mb-3.text-muted = t('bulletins.show.details')
             .row
               .col-6.mb-2
-                strong = t("bulletins.show.author")
+                strong = t('bulletins.show.author')
                 .text-muted = @bulletin.user.name
               .col-6.mb-2
-                strong = t("bulletins.show.published_at")
+                strong = t('bulletins.show.published_at')
                 .text-muted = format_datetime(@bulletin.created_at)
