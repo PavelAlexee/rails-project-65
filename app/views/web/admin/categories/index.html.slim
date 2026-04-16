@@ -3,8 +3,7 @@
     = render 'web/admin/shared/menu'
     .col-md-9
       .h2.mb-4 = t('admin.categories.index.title')
-      = link_to t('admin.categories.index.new_category'), new_admin_category_path,
-                                  class: 'link-primary'
+      = link_to t('admin.categories.index.new_category'), new_admin_category_path, class: 'link-primary'
       - if @categories.empty?
         .text-center.py-5
           h3 = t('admin.categories.index.empty')
@@ -21,7 +20,6 @@
                 tr
                   td.align-middle = category.id
                   td.align-middle = category.name
-                  td = render partial: 'web/admin/categories/action_buttons',
-                                      locals: { category: }
+                  td = render partial: 'web/admin/categories/action_buttons', locals: { category: }
 
         = render 'layouts/shared/paginator', object: @categories

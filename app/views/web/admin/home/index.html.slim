@@ -5,17 +5,16 @@
       .h2.mb-4 = t('admin.home.index.title')
       .row.mt-2
         table.table
-            thead
+          thead
+            tr
+              th.w-25 = t('admin.home.index.table.title')
+              th.w-25 = t('admin.home.index.table.created_at')
+              th.w-25 = t('admin.home.index.table.actions')
+          tbody
+            - @bulletins.each do |bulletin|
               tr
-                th.w-25 = t('admin.home.index.table.title')
-                th.w-25 = t('admin.home.index.table.created_at')
-                th.w-25 = t('admin.home.index.table.actions')
-            tbody
-              - @bulletins.each do |bulletin|
-                tr
-                  td.align-middle = link_to bulletin.title,
-                                          bulletin_path(bulletin)
-                  td.align-middle = format_datetime(bulletin.created_at)
-                  td = render partial: 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: }
+                td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
+                td.align-middle = format_datetime(bulletin.created_at)
+                td = render partial: 'web/admin/bulletins/action_buttons_moderate', locals: { bulletin: }
 
       = render 'layouts/shared/paginator', object: @bulletins

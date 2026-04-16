@@ -6,7 +6,13 @@
       = simple_form_for @category, url: admin_categories_path do |f|
         - if @category.errors.any?
           .alert.alert-danger.mb-4
-            h5 = "#{pluralize(@category.errors.count, t('admin.categories.form.errors.one'), t('admin.categories.form.errors.few'), t('admin.categories.form.errors.many'), t('admin.categories.form.errors.other'))} #{t('admin.categories.form.errors.title')}"
+            h5
+              = pluralize(@category.errors.count,
+                 t('admin.categories.form.errors.one'),
+                 t('admin.categories.form.errors.few'),
+                 t('admin.categories.form.errors.many'),
+                 t('admin.categories.form.errors.other'))
+              = " #{t('admin.categories.form.errors.title')}"
             ul
               - @category.errors.full_messages.each do |msg|
                 li = msg

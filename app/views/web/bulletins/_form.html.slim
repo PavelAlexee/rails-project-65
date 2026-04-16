@@ -1,7 +1,13 @@
 = simple_form_for @bulletin do |f|
   - if @bulletin.errors.any?
     .alert.alert-danger.mb-4
-      h5 = "#{pluralize(@bulletin.errors.count, t('bulletins.form.errors.one'), t('bulletins.form.errors.few'), t('bulletins.form.errors.many'), t('bulletins.form.errors.other'))} #{t('bulletins.form.errors.title')}"
+      h5
+        = pluralize(@bulletin.errors.count,
+           t('bulletins.form.errors.one'),
+           t('bulletins.form.errors.few'),
+           t('bulletins.form.errors.many'),
+           t('bulletins.form.errors.other'))
+        = " #{t('bulletins.form.errors.title')}"
       ul
         - @bulletin.errors.full_messages.each do |msg|
           li = msg

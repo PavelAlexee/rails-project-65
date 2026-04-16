@@ -17,12 +17,10 @@
             tbody
               - @bulletins.each do |bulletin|
                 tr
-                  td.align-middle = link_to bulletin.title,
-                                              bulletin_path(bulletin)
+                  td.align-middle = link_to bulletin.title, bulletin_path(bulletin)
                   td.align-middle = human_state(bulletin.state)
                   td.align-middle = format_datetime(bulletin.created_at)
-                  td = render partial: 'web/admin/bulletins/action_buttons',
-                                      locals: { bulletin: }
+                  td = render partial: 'web/admin/bulletins/action_buttons', locals: { bulletin: }
           .d-flex.justify-content-center.mt-4
 
       = render 'layouts/shared/paginator', object: @bulletins
