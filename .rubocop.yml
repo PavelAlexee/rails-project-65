@@ -34,3 +34,7 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Enabled: false
   
+Metrics/BlockLength:
+  Exclude:
+    - 'test/test_helper.rb'
+  
