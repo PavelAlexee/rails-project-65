@@ -8,20 +8,20 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     @jane = users(:jane)
   end
 
-  test "should get index" do
+  test 'should get index' do
     sign_in(@jane)
     get root_path
     assert_response :success
   end
 
-  test "should get profile" do
+  test 'should get profile' do
     sign_in(@john)
     get profile_path
     assert_response :success
-    assert_select "a", "Админка"
+    assert_select 'a', 'Админка'
   end
 
-  test "should make user admin" do
+  test 'should make user admin' do
     sign_in(@jane)
     assert_not @jane.admin?
 
@@ -32,7 +32,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert @jane.admin?
   end
 
-  test "should remove admin status" do
+  test 'should remove admin status' do
     sign_in(@john)
     assert @john.admin?
 

@@ -42,9 +42,9 @@ ActionDispatch::IntegrationTest.class_eval do
   def create_bulletin_with_image(attributes = {})
     bulletin = Bulletin.new(attributes)
     bulletin.image.attach(
-      io: File.open(Rails.root.join("test/fixtures/files/test.png")),
-      filename: "test.png",
-      content_type: "image/png"
+      io: File.open(Rails.root.join('test/fixtures/files/test.png')),
+      filename: 'test.png',
+      content_type: 'image/png'
     )
     bulletin.save!
     bulletin
