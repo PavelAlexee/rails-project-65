@@ -26,18 +26,18 @@ module Web
       def reject
         bulletin = Bulletin.find(params[:id])
 
-    if bulletin.may_reject?
-      bulletin.reject!
-      redirect_to admin_root_path, notice: t('flash.bulletins.reject.success')
-    else
-      redirect_to admin_root_path, alert: t('flash.bulletins.reject.failure')
-    end
-  end
+        if bulletin.may_reject?
+          bulletin.reject!
+          redirect_to admin_root_path, notice: t('flash.bulletins.reject.success')
+        else
+          redirect_to admin_root_path, alert: t('flash.bulletins.reject.failure')
+        end
+      end
 
       def archive
         bulletin = Bulletin.find(params[:id])
 
-    return_path = params[:return_to].presence || admin_root_path
+        return_path = params[:return_to].presence || admin_root_path
 
         if bulletin.may_archive?
           bulletin.archive!

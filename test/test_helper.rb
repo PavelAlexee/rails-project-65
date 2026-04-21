@@ -13,7 +13,7 @@ module ActiveSupport
   end
 end
 
-ActionDispatch::IntegrationTest.class_eval do
+module AuthHelpers
   def sign_in(user)
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
       provider: 'github',
@@ -25,9 +25,7 @@ ActionDispatch::IntegrationTest.class_eval do
     )
 
     get callback_auth_path('github')
-
     follow_redirect!
-
     puts "After sign_in - session user_id: #{session[:user_id]}" if ENV['DEBUG']
   end
 
@@ -38,15 +36,22 @@ ActionDispatch::IntegrationTest.class_eval do
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
+end
 
+module BulletinHelpers
   def create_bulletin_with_image(attributes = {})
     bulletin = Bulletin.new(attributes)
     bulletin.image.attach(
-      io: File.open(Rails.root.join('test/fixtures/files/test.png')),
+      io: Rails.root.join('test/fixtures/files/test.png').open,
       filename: 'test.png',
       content_type: 'image/png'
     )
     bulletin.save!
     bulletin
   end
+end
+
+ActionDispatch::IntegrationTest.class_eval do
+  include AuthHelpers
+  include BulletinHelpers
 end

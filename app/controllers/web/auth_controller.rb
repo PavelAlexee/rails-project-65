@@ -8,7 +8,7 @@ module Web
       email = auth_hash.info.email
       name = auth_hash.info.name
 
-      user = User.find_or_initialize_by(name:, email:, github_uid:)
+      user = User.find_or_initialize_by(name: name, email: email, github_uid: github_uid)
 
       if user.save
         session[:user_id] = user.id
