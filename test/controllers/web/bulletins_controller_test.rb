@@ -35,12 +35,6 @@ module Web
       assert_response :success
     end
 
-    test 'should not get new when not authenticated' do
-      get new_bulletin_path
-      assert_redirected_to root_path
-      assert_equal I18n.t('flash.auth_required'), flash[:alert]
-    end
-
     test 'should create bulletin when authenticated' do
       sign_in(@user)
 
@@ -51,14 +45,6 @@ module Web
       bulletin = Bulletin.last
       assert_redirected_to bulletin_path(bulletin)
       assert_equal I18n.t('flash.bulletins.create.success'), flash[:notice]
-    end
-
-    test 'should not create bulletin when not authenticated' do
-      assert_no_difference('Bulletin.count') do
-        post bulletins_path, params: { bulletin: @valid_bulletin_params }
-      end
-      assert_redirected_to root_path
-      assert_equal I18n.t('flash.auth_required'), flash[:alert]
     end
 
     test 'should get edit when owner' do

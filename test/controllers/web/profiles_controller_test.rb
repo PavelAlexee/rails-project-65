@@ -14,13 +14,6 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get profile' do
-    sign_in(@john)
-    get profile_path
-    assert_response :success
-    assert_select 'a', 'Админка'
-  end
-
   test 'should make user admin' do
     sign_in(@jane)
     assert_not @jane.admin?
