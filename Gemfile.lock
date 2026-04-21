@@ -489,7 +489,7 @@ DEPENDENCIES
   aasm
   active_storage_validations
   bootsnap
-  brakeman (~> 8.0)
+  brakeman
   bundler-audit
   capybara
   cssbundling-rails
